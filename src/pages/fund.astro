@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import FundStats from '../components/FundStats.astro';
+import fund from '../data/fund.json';
+import { formatPeriod } from '../lib/utils';
+
+const steps = [
+  {
+    no: '01',
+    title: '리서치',
+    owner: '리서치 1팀 · 리서치 2팀',
+    desc: '기업·산업 분석을 통해 투자 아이디어를 발굴하고 근거를 정리합니다.',
+  },
+  {
+    no: '02',
+    title: '투자 운용',
+    owner: '투자운용팀',
+    desc: '리서치 결과를 바탕으로 포트폴리오를 구성하고 매매를 집행합니다.',
+  },
+  {
+    no: '03',
+    title: '리스크 점검',
+    owner: '리스크관리팀',
+    desc: '손실 한도와 투자 한도를 지키고 있는지 점검합니다.',
+  },
+  {
+    no: '04',
+    title: '보고 · 결재',
+    owner: '운용 결과 보고',
+    desc: '운용 내역과 성과를 보고하고 결재를 거칩니다.',
+  },
+];
+---
+
+<BaseLayout
+  title="실전 자산운용"
+  description={`KFEC 실전 자산운용 프로세스와 운용 성과. 운용 기간 ${formatPeriod(fund.periodStart, fund.periodEnd)}.`}
+>
+  <PageHeader
+    eyebrow="Asset Management"
+    title="실전 자산운용"
+    lead="리서치에서 출발해 운용, 리스크 점검, 보고·결재까지. 역할을 나눈 네 개의 단계로 직접 운용합니다."
+  />
+
+  <section class="container-page py-14 sm:py-16" aria-labelledby="process-title">
+    <SectionHeading eyebrow="Process" title="운용 프로세스" id="process-title" />
+    <ol class="mt-8 grid gap-px border border-line bg-line md:grid-cols-4">
+      {steps.map((s, i) => (
+        <li class="relative bg-white p-6">
+          <p class="num font-display text-3xl font-black text-navy">{s.no}</p>
+          <h3 class="mt-4 font-serif text-xl font-bold">{s.title}</h3>
+          <p class="mt-1 text-sm font-bold text-navy">{s.owner}</p>
+          <p class="mt-3 text-sm leading-6 text-muted">{s.desc}</p>
+          {i < steps.length - 1 && (
+            <span aria-hidden="true" class="absolute top-7 right-5 hidden text-xl text-line md:block">→</span>
+          )}
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="bg-white" aria-labelledby="performance-title">
+    <div class="container-page py-14 sm:py-16">
+      <SectionHeading eyebrow="Performance" title="운용 성과" id="performance-title" />
+      <div class="mt-8">
+        <FundStats />
+      </div>
+      <p class="mt-4 text-sm leading-6 text-muted">
+        표시된 수익률은 학회 실전 운용의 기록이며, 과거 성과가 미래 수익을 보장하지 않습니다.
+        수익률 표기: <span class="tone-up font-bold">상승(+)</span> · <span class="tone-down font-bold">하락(−)</span>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #06377b;
+  --color-navy-dark: #042a5f;
+  --color-ink: #0f1b2d;
+  --color-paper: #f6f5f1;
+  --color-muted: #4b5563;
+  --color-line: #dcdfe6;
+  --color-on-navy: #c9d6ea;
+  --color-up: #b42318;
+  --color-down: #1d4ed8;
+
+  --font-display: "Playfair Display", "Noto Serif KR", Georgia, serif;
+  --font-serif: "Noto Serif KR", "Playfair Display", serif;
+  --font-sans: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  h1, h2, h3 {
+    @apply font-display;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-navy);
+    outline-offset: 2px;
+  }
+  .bg-navy :focus-visible,
+  .on-dark :focus-visible {
+    outline-color: #fff;
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-bold transition-colors;
+}
+@utility btn-primary {
+  @apply btn bg-navy text-white hover:bg-navy-dark;
+}
+@utility btn-outline {
+  @apply btn border border-navy text-navy hover:bg-navy hover:text-white;
+}
+@utility btn-light {
+  @apply btn bg-white text-navy hover:bg-paper;
+}
+@utility btn-outline-light {
+  @apply btn border border-white text-white hover:bg-white hover:text-navy;
+}
+@utility link {
+  @apply text-navy underline decoration-1 underline-offset-4 hover:decoration-2;
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+  .eyebrow {
+    @apply font-display text-xs font-bold uppercase tracking-[0.2em] text-navy;
+  }
+  .num {
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .tone-up { color: var(--color-up); }
+  .tone-down { color: var(--color-down); }
+  .tone-flat { color: var(--color-ink); }
+
+  /* 리포트 본문 */
+  .prose-report { @apply text-[1.0625rem] leading-8 text-ink; }
+  .prose-report h2 { @apply mt-10 mb-3 border-b border-line pb-2 font-serif text-xl font-bold text-navy; }
+  .prose-report h3 { @apply mt-8 mb-2 font-serif text-lg font-bold; }
+  .prose-report p { @apply my-4; }
+  .prose-report ul { @apply my-4 list-disc pl-6; }
+  .prose-report ol { @apply my-4 list-decimal pl-6; }
+  .prose-report li { @apply my-1.5; }
+  .prose-report a { @apply link; }
+  .prose-report strong { @apply font-bold; }
+  .prose-report blockquote { @apply my-6 border-l-4 border-navy bg-white px-5 py-3 text-muted; }
+  .prose-report table { @apply my-6 w-full border-collapse text-sm; }
+  .prose-report th { @apply border-b-2 border-navy px-3 py-2 text-left font-bold; }
+  .prose-report td { @apply border-b border-line px-3 py-2; }
+  .prose-report img { @apply my-6 h-auto max-w-full; }
+}

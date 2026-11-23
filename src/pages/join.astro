@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import site from '../data/site.json';
+
+const requirements = ['신문 스크랩 10회', '기업 분석 보고서 1회', '교외 대회 1회', '강연 참여 1회'];
+---
+
+<BaseLayout
+  title="가입 안내"
+  description="KFEC 가입 자격, 학회비, 정규 활동 일정, 수료 기준을 안내합니다. 경성대학교 학생 누구나 지원할 수 있습니다."
+>
+  <PageHeader
+    eyebrow="Join"
+    title="가입 안내"
+    lead="경성대학교 학생이라면 전공과 학년에 관계없이 누구나 함께할 수 있습니다."
+  />
+
+  <section class="container-page py-14 sm:py-16" aria-labelledby="info-title">
+    <SectionHeading eyebrow="Information" title="모집 정보" id="info-title" />
+    <dl class="mt-8 grid gap-px border border-line bg-line md:grid-cols-3">
+      <div class="bg-white p-6">
+        <dt class="text-sm font-bold text-navy">가입 자격</dt>
+        <dd class="mt-3 text-lg font-bold">경성대학교 학생 누구나</dd>
+      </div>
+      <div class="bg-white p-6">
+        <dt class="text-sm font-bold text-navy">학회비</dt>
+        <dd class="mt-3">
+          <span class="num block text-lg font-bold">{site.fee}</span>
+          <span class="mt-1 block text-sm text-muted">{site.feeExemption}</span>
+        </dd>
+      </div>
+      <div class="bg-white p-6">
+        <dt class="text-sm font-bold text-navy">정규 활동</dt>
+        <dd class="num mt-3 text-lg font-bold">{site.meeting}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="bg-white" aria-labelledby="completion-title">
+    <div class="container-page py-14 sm:py-16">
+      <SectionHeading eyebrow="Completion" title="수료 기준" id="completion-title" />
+      <div class="mt-8 grid gap-8 md:grid-cols-[1fr_1.5fr]">
+        <div class="border-l-4 border-navy bg-paper p-6">
+          <p class="text-sm font-bold text-navy">기본 요건</p>
+          <p class="mt-2 text-xl font-bold"><span class="num">1</span>년 이상 활동</p>
+          <p class="mt-3 text-sm text-muted">아래 활동 중 <strong class="text-ink">2개 이상</strong>을 함께 충족해야 합니다.</p>
+        </div>
+        <ol class="grid gap-px border border-line bg-line sm:grid-cols-2">
+          {requirements.map((r, i) => (
+            <li class="flex items-baseline gap-3 bg-white p-5">
+              <span class="num font-display text-lg font-bold text-navy" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <span class="font-medium">{r}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-navy text-white" aria-labelledby="contact-title">
+    <div class="container-page flex flex-col gap-6 py-14 md:flex-row md:items-center md:justify-between">
+      <div>
+        <h2 id="contact-title" class="font-serif text-2xl font-bold">가입 문의</h2>
+        <p class="mt-2 text-on-navy">모집 일정과 지원 방법은 네이버 카페에서 안내합니다.</p>
+      </div>
+      <a href={site.cafeUrl} target="_blank" rel="noopener noreferrer" class="btn-light shrink-0">
+        네이버 카페에서 문의하기<span class="sr-only"> (새 창)</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import { url } from '../lib/utils';
+import site from '../data/site.json';
+---
+
+<footer class="bg-ink text-on-navy on-dark">
+  <div class="container-page grid gap-10 py-12 md:grid-cols-[1fr_auto]">
+    <div>
+      <img
+        src={url('/images/kfec-logo-white.png')}
+        alt="KFEC Kyungsung Finance & Economics Club"
+        width="311"
+        height="100"
+        class="h-14 w-auto"
+        loading="lazy"
+      />
+      <p class="mt-5 text-sm">{site.koreanName} · {site.affiliation}</p>
+      <p class="mt-4 max-w-xl text-sm leading-6">
+        KFEC의 리서치 자료는 학습 목적의 참고 자료이며 투자 권유가 아닙니다.
+      </p>
+    </div>
+    <div class="md:text-right">
+      <a
+        href={site.cafeUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 border border-on-navy px-4 py-2.5 text-sm font-medium text-white hover:bg-white hover:text-ink"
+      >
+        네이버 카페 바로가기<span class="sr-only"> (새 창)</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
+      </a>
+    </div>
+  </div>
+  <div class="border-t border-white/15">
+    <p class="container-page py-5 text-xs num">© 2026 KFEC. All rights reserved.</p>
+  </div>
+</footer>

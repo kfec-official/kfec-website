@@ -1,0 +1,32 @@
+---
+import fund from '../data/fund.json';
+import { formatPeriod, returnTone } from '../lib/utils';
+
+const stats = [
+  { label: '누적 수익률', value: fund.cumulativeReturn, tone: returnTone(fund.cumulativeReturn) },
+  { label: 'KOSPI 수익률 (같은 기간)', value: fund.kospiReturn, tone: returnTone(fund.kospiReturn) },
+  { label: 'KOSPI 대비 성과', value: fund.excessReturn, tone: returnTone(fund.excessReturn) },
+];
+---
+
+<div class="border border-line bg-white">
+  <dl class="grid divide-y divide-line sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+    {stats.map((s) => (
+      <div class="px-6 py-6">
+        <dt class="text-sm font-medium text-muted">{s.label}</dt>
+        <dd class:list={['num mt-2 font-display text-3xl font-bold sm:text-4xl', `tone-${s.tone}`]}>{s.value}</dd>
+      </div>
+    ))}
+  </dl>
+  <dl class="flex flex-wrap gap-x-8 gap-y-2 border-t border-line bg-paper px-6 py-4 text-sm">
+    <div class="flex gap-2">
+      <dt class="text-muted">운용 기간</dt>
+      <dd class="num font-medium">{formatPeriod(fund.periodStart, fund.periodEnd)}</dd>
+    </div>
+    <div class="flex gap-2">
+      <dt class="text-muted">기준일</dt>
+      <dd class="num font-medium">{fund.asOf}</dd>
+    </div>
+  </dl>
+  {fund.note && <p class="border-t border-line px-6 py-4 text-sm text-muted">{fund.note}</p>}
+</div>

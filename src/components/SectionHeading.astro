@@ -1,0 +1,24 @@
+---
+import { url } from '../lib/utils';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  id?: string;
+  moreHref?: string;
+  moreLabel?: string;
+}
+const { eyebrow, title, id, moreHref, moreLabel = '전체 보기' } = Astro.props;
+---
+
+<div class="flex flex-wrap items-end justify-between gap-4 border-b-2 border-navy pb-4">
+  <div>
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 id={id} class="mt-2 font-serif text-2xl font-bold text-ink sm:text-[1.75rem]">{title}</h2>
+  </div>
+  {moreHref && (
+    <a href={url(moreHref)} class="text-sm font-bold text-navy hover:underline underline-offset-4">
+      {moreLabel}<span class="sr-only"> — {title}</span> →
+    </a>
+  )}
+</div>

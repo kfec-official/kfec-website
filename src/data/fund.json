@@ -1,0 +1,9 @@
+{
+  "periodStart": "2026.09.28",
+  "periodEnd": "2026.12.31",
+  "asOf": "[YYYY.MM.DD]",
+  "cumulativeReturn": "[±0.00%]",
+  "kospiReturn": "[±0.00%]",
+  "excessReturn": "[±0.00%p]",
+  "note": ""
+}

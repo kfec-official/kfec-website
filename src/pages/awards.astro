@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import AwardsTable from '../components/AwardsTable.astro';
+import { getAwards } from '../lib/utils';
+
+const awards = getAwards();
+---
+
+<BaseLayout title="수상 내역" description="KFEC 학회원들의 교외 금융·경제 대회 수상 내역입니다.">
+  <PageHeader
+    eyebrow="Awards"
+    title="수상 내역"
+    lead="학회원들이 교외 대회에서 거둔 성과입니다. 최신순으로 정렬되어 있습니다."
+  />
+  <section class="container-page py-12 sm:py-16" aria-label="수상 내역 표">
+    <AwardsTable awards={awards} caption="KFEC 수상 내역 (최신순)" />
+    <p class="mt-4 text-sm text-muted md:hidden">표가 화면보다 넓으면 좌우로 밀어서 볼 수 있습니다.</p>
+  </section>
+</BaseLayout>

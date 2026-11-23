@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import site from '../data/site.json';
+
+const teams = [
+  { name: '리서치 1팀', desc: '기업·산업 분석 보고서 작성' },
+  { name: '리서치 2팀', desc: '기업·산업 분석 보고서 작성' },
+  { name: '투자운용팀', desc: '실전 자산운용 포트폴리오 구성·집행' },
+  { name: '리스크관리팀', desc: '손실 한도·투자 한도 점검' },
+];
+---
+
+<BaseLayout
+  title="소개 · 조직"
+  description={`${site.koreanName} KFEC의 목적과 조직을 소개합니다. ${site.affiliation} 소속.`}
+>
+  <PageHeader eyebrow="About" title="학회 소개" />
+
+  <section class="container-page py-14 sm:py-16" aria-labelledby="purpose-title">
+    <div class="grid gap-10 md:grid-cols-[1fr_1.6fr]">
+      <div>
+        <p class="eyebrow">Purpose</p>
+        <h2 id="purpose-title" class="mt-2 font-serif text-2xl font-bold sm:text-[1.75rem]">목적</h2>
+      </div>
+      <div>
+        <p class="font-serif text-xl font-bold leading-9 text-ink sm:text-2xl sm:leading-10">
+          경제·금융 분야의 학문적 탐구를 바탕으로 실무 역량을 강화하고, 교수진·현직 선배와의 네트워크로
+          차세대 금융 전문 인재를 양성합니다.
+        </p>
+        <dl class="mt-10 border-t border-line">
+          <div class="grid grid-cols-[7rem_1fr] gap-4 border-b border-line py-4">
+            <dt class="text-sm text-muted">학회명</dt>
+            <dd class="font-medium">{site.koreanName} <span class="font-display">({site.name} · {site.fullName})</span></dd>
+          </div>
+          <div class="grid grid-cols-[7rem_1fr] gap-4 border-b border-line py-4">
+            <dt class="text-sm text-muted">소속</dt>
+            <dd class="font-medium">{site.affiliation}</dd>
+          </div>
+          <div class="grid grid-cols-[7rem_1fr] gap-4 border-b border-line py-4">
+            <dt class="text-sm text-muted">정규 활동</dt>
+            <dd class="num font-medium">{site.meeting}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white" aria-labelledby="organization">
+    <div class="container-page py-14 sm:py-16">
+      <SectionHeading eyebrow="Organization" title="조직도" id="organization" />
+
+      <!-- 조직도: 시각적 도식 + 스크린 리더용 계층 목록 -->
+      <div class="mt-10" aria-hidden="true">
+        <div class="mx-auto flex max-w-3xl flex-col items-center">
+          <div class="relative flex w-full justify-center">
+            <div class="w-44 bg-navy px-4 py-4 text-center text-white">
+              <p class="font-display text-xs tracking-[0.2em]">PRESIDENT</p>
+              <p class="mt-1 text-lg font-bold">회장</p>
+            </div>
+            <div class="absolute top-1/2 right-0 hidden -translate-y-1/2 items-center sm:flex">
+              <span class="h-px w-10 border-t border-dashed border-muted"></span>
+              <div class="w-36 border border-navy bg-white px-4 py-3 text-center">
+                <p class="font-display text-xs tracking-[0.2em] text-navy">AUDITOR</p>
+                <p class="mt-1 font-bold">감사</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 w-36 border border-navy bg-white px-4 py-3 text-center sm:hidden">
+            <p class="font-display text-xs tracking-[0.2em] text-navy">AUDITOR</p>
+            <p class="mt-1 font-bold">감사</p>
+          </div>
+          <span class="h-8 w-px bg-navy"></span>
+          <div class="w-56 border-2 border-navy bg-white px-4 py-3 text-center">
+            <p class="font-display text-xs tracking-[0.2em] text-navy">VICE PRESIDENTS</p>
+            <p class="mt-1 text-lg font-bold">부회장 <span class="num">2</span>인</p>
+          </div>
+          <span class="h-8 w-px bg-navy"></span>
+        </div>
+        <div class="mx-auto max-w-5xl">
+          <div class="mx-[12.5%] hidden h-px bg-navy md:block"></div>
+          <ul class="grid gap-3 sm:grid-cols-2 md:grid-cols-4 md:gap-4">
+            {teams.map((t) => (
+              <li class="flex flex-col items-center">
+                <span class="hidden h-6 w-px bg-navy md:block"></span>
+                <div class="w-full border-t-4 border-navy bg-paper px-4 py-5 text-center">
+                  <p class="font-bold">{t.name}</p>
+                  <p class="mt-1 text-sm text-muted">{t.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="sr-only">
+        <ul>
+          <li>회장
+            <ul>
+              <li>감사 (독립)</li>
+              <li>부회장 2인
+                <ul>
+                  {teams.map((t) => <li>{t.name}: {t.desc}</li>)}
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
