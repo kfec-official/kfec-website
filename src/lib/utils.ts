@@ -64,9 +64,7 @@ export type Alumni = {
   /** 재직 / 인턴 / 현장실습 등 */
   status: string;
   organization: string;
-  role: string;
   year: string | number;
-  member?: string;
 };
 
 /** Alumni·실습 현황을 최신 연도순(자리표시 연도는 맨 뒤)으로 정렬합니다. 같은 해는 파일 순서를 따릅니다. */

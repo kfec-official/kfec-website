@@ -1,19 +1,46 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import SectionHeading from '../components/SectionHeading.astro';
 import AwardsByYear from '../components/AwardsByYear.astro';
-import { getAwards } from '../lib/utils';
+import AlumniByYear from '../components/AlumniByYear.astro';
+import { getAwards, getAlumni } from '../lib/utils';
 
 const awards = getAwards();
+const alumni = getAlumni();
 ---
 
-<BaseLayout title="수상 내역" description="KFEC 학회원들의 교내외 금융·경제 대회 수상 내역입니다.">
+<BaseLayout
+  title="수상 내역 · Alumni 현황"
+  description="KFEC 학회원들의 교내외 금융·경제 대회 수상 내역과 Alumni 진출·인턴·현장실습 현황입니다."
+>
   <PageHeader
     eyebrow="Achievements"
-    title="수상 내역"
-    lead="학회원들이 교내외 대회에서 거둔 성과입니다. 연도별로 정리했습니다."
-  />
-  <section class="container-page py-12 sm:py-16" aria-label="연도별 수상 내역">
-    <AwardsByYear awards={awards} headingLevel="h2" />
+    title="수상 내역 · Alumni 현황"
+    lead="학회원들이 교내외 대회에서 거둔 성과와, 금융 현장으로 진출한 선배·인턴·현장실습 현황입니다."
+  >
+    <nav aria-label="이 페이지 안 바로가기" class="mt-8">
+      <ul class="flex flex-wrap gap-2">
+        <li><a href="#awards" class="btn-outline px-4 py-2">수상 내역</a></li>
+        <li><a href="#alumni" class="btn-outline px-4 py-2">Alumni·실습 현황</a></li>
+      </ul>
+    </nav>
+  </PageHeader>
+
+  <section class="container-page py-12 sm:py-16" aria-labelledby="awards">
+    <SectionHeading eyebrow="Awards" title="수상 내역" id="awards" />
+    <div class="mt-10">
+      <AwardsByYear awards={awards} />
+    </div>
+  </section>
+
+  <section class="bg-white" aria-labelledby="alumni">
+    <div class="container-page py-12 sm:py-16">
+      <SectionHeading eyebrow="Alumni" title="Alumni·실습 현황" id="alumni" />
+      <p class="mt-4 text-sm text-muted">KFEC 출신 선배들의 진출처와 인턴·현장실습 중인 학회원 현황입니다.</p>
+      <div class="mt-10">
+        <AlumniByYear list={alumni} />
+      </div>
+    </div>
   </section>
 </BaseLayout>

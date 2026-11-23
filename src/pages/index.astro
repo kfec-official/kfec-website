@@ -3,13 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import ReportCard from '../components/ReportCard.astro';
 import AwardsByYear from '../components/AwardsByYear.astro';
-import AlumniTable from '../components/AlumniTable.astro';
-import { url, getReports, getAwards, getAlumni } from '../lib/utils';
+import { url, getReports, getAwards } from '../lib/utils';
 import site from '../data/site.json';
 
 const reports = (await getReports()).slice(0, 3);
 const awards = getAwards().slice(0, 3);
-const alumni = getAlumni().slice(0, 3);
 ---
 
 <BaseLayout
@@ -102,16 +100,6 @@ const alumni = getAlumni().slice(0, 3);
       <SectionHeading eyebrow="Achievements" title="최근 수상 내역" id="awards-title" moreHref="/awards" />
       <div class="mt-8">
         <AwardsByYear awards={awards} />
-      </div>
-    </div>
-  </section>
-
-  <!-- Alumni·실습 현황 -->
-  <section aria-labelledby="alumni-title">
-    <div class="container-page py-16 md:py-20">
-      <SectionHeading eyebrow="Alumni" title="Alumni·실습 현황" id="alumni-title" moreHref="/alumni" />
-      <div class="mt-8">
-        <AlumniTable list={alumni} caption="최근 Alumni·실습 현황 3건" />
       </div>
     </div>
   </section>
