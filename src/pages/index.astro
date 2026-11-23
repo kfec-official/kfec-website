@@ -2,16 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import ReportRow from '../components/ReportRow.astro';
-import OpinionBadge from '../components/OpinionBadge.astro';
+import YeouidoSkyline from '../components/YeouidoSkyline.astro';
 import AwardsByYear from '../components/AwardsByYear.astro';
-import { url, getReports, getAwards, formatDate, isoDate } from '../lib/utils';
+import { url, getReports, getAwards } from '../lib/utils';
 import site from '../data/site.json';
 import ActivityList from '../components/ActivityList.astro';
 
-const allReports = await getReports();
-const reports = allReports.slice(0, 3);
-const latest = allReports[0];
-const latestIso = latest ? isoDate(latest.data.date) : undefined;
+const reports = (await getReports()).slice(0, 3);
 const awards = getAwards().slice(0, 3);
 ---
 
@@ -19,9 +16,9 @@ const awards = getAwards().slice(0, 3);
   description="경성대학교 금융투자학회 KFEC 공식 홈페이지. 기업·산업 분석 리서치와 교내외 대회 활동으로 차세대 금융 전문 인재를 양성합니다."
 >
   <!-- 히어로 -->
-  <section class="bg-navy text-white on-dark" aria-labelledby="hero-title">
-    <div class="container-page grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-16 lg:py-24">
-      <div>
+  <section class="overflow-hidden bg-navy text-white on-dark" aria-labelledby="hero-title">
+    <div class="container-page grid gap-10 pt-16 sm:pt-20 lg:grid-cols-[1fr_1.05fr] lg:items-end lg:gap-12 lg:pt-24">
+      <div class="lg:pb-24">
         <img
           src={url('/images/kfec-logo-white.png')}
           alt="KFEC Kyungsung Finance & Economics Club"
@@ -40,31 +37,10 @@ const awards = getAwards().slice(0, 3);
         </div>
       </div>
 
-      {latest && (
-        <aside aria-labelledby="latest-title" class="border border-white/25 bg-navy-dark p-6 sm:p-8">
-          <div class="flex items-center justify-between gap-4 border-b border-white/20 pb-4">
-            <p class="eyebrow-light" lang="en">Latest Research</p>
-            <p class="text-xs text-on-navy">
-              <span class="font-bold text-white">{latest.data.category}</span>
-              <span aria-hidden="true"> · </span>
-              {latestIso ? <time class="num" datetime={latestIso}>{formatDate(latest.data.date)}</time> : formatDate(latest.data.date)}
-            </p>
-          </div>
-          <h2 id="latest-title" class="mt-6 font-serif text-xl font-bold leading-snug sm:text-2xl">
-            <a href={url(`/research/${latest.id}/`)} class="hover:underline underline-offset-4">{latest.data.title}</a>
-          </h2>
-          <p class="mt-4 line-clamp-3 text-sm leading-7 text-on-navy">{latest.data.summary}</p>
-          <div class="mt-7 flex items-center justify-between gap-4 border-t border-white/20 pt-5">
-            <div class="flex items-center gap-3">
-              <OpinionBadge opinion={latest.data.opinion} tone="light" />
-              <span class="text-xs text-on-navy">{latest.data.team}</span>
-            </div>
-            <a href={url(`/research/${latest.id}/`)} class="text-sm font-bold text-white hover:underline underline-offset-4" aria-hidden="true" tabindex="-1">
-              리포트 읽기 →
-            </a>
-          </div>
-        </aside>
-      )}
+      <figure class="-mx-5 sm:mx-0 bleed-right">
+        <YeouidoSkyline />
+        <figcaption class="sr-only">여의도 금융가</figcaption>
+      </figure>
     </div>
 
     <div class="border-t border-white/15">

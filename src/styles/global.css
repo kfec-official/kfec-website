@@ -88,3 +88,10 @@
   .prose-report td { @apply border-b border-line px-3 py-2; }
   .prose-report img { @apply my-6 h-auto max-w-full; }
 }
+
+/* 히어로 일러스트를 화면 오른쪽 끝까지 이어지게 */
+@media (min-width: 1024px) {
+  .bleed-right {
+    margin-right: calc(-1 * max(2rem, (100vw - 72rem) / 2 + 2rem));
+  }
+}
