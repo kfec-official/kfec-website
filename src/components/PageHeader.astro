@@ -2,25 +2,26 @@
 import { url } from '../lib/utils';
 
 interface Props {
-  eyebrow: string;
+  /** 영문 페이지 제목 */
   title: string;
+  /** 한 줄 한글 설명 */
   lead?: string;
 }
-const { eyebrow, title, lead } = Astro.props;
+const { title, lead } = Astro.props;
 ---
 
 <section class="bg-navy text-white on-dark">
   <div class="container-page py-12 sm:py-16">
-    <nav aria-label="현재 위치" class="text-xs text-on-navy">
+    <nav aria-label="현재 위치" class="font-display text-xs tracking-[0.12em] text-on-navy uppercase" lang="en">
       <ol class="flex items-center gap-2">
-        <li><a href={url('/')} class="hover:text-white hover:underline underline-offset-4">홈</a></li>
+        <li><a href={url('/')} class="hover:text-white hover:underline underline-offset-4">Home</a></li>
         <li aria-hidden="true">/</li>
-        <li><span aria-current="page" class="font-display tracking-[0.12em] uppercase" lang="en">{eyebrow}</span></li>
+        <li><span aria-current="page">{title}</span></li>
       </ol>
     </nav>
-    <h1 class="mt-6 font-serif text-3xl font-bold sm:text-[2.75rem] sm:leading-tight">{title}</h1>
-    <div class="mt-5 h-0.5 w-12 bg-white"></div>
-    {lead && <p class="mt-5 max-w-2xl text-base leading-7 text-on-navy sm:text-lg">{lead}</p>}
+    <h1 lang="en" class="mt-6 font-display text-[2.5rem] font-bold leading-none sm:text-[3.5rem]">{title}</h1>
+    <div class="mt-6 h-0.5 w-12 bg-white"></div>
+    {lead && <p class="mt-5 text-base text-on-navy sm:text-lg">{lead}</p>}
     <slot />
   </div>
 </section>

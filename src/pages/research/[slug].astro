@@ -32,11 +32,11 @@ const pdfHref = pdfFile ? url(`/reports/${encodeURIComponent(pdfFile)}`) : undef
   <article>
     <header class="bg-navy text-white on-dark">
       <div class="container-page py-12 sm:py-16">
-        <nav aria-label="현재 위치" class="text-xs text-on-navy">
+        <nav aria-label="현재 위치" class="font-display text-xs tracking-[0.12em] text-on-navy">
           <ol class="flex flex-wrap items-center gap-2">
-            <li><a href={url('/')} class="hover:text-white hover:underline underline-offset-4">홈</a></li>
+            <li><a href={url('/')} class="hover:text-white hover:underline underline-offset-4">Home</a></li>
             <li aria-hidden="true">/</li>
-            <li><a href={url('/research')} class="hover:text-white hover:underline underline-offset-4">리서치</a></li>
+            <li><a href={url('/research')} class="hover:text-white hover:underline underline-offset-4">Research</a></li>
             <li aria-hidden="true">/</li>
             <li><span aria-current="page">{category}</span></li>
           </ol>
@@ -56,19 +56,19 @@ const pdfHref = pdfFile ? url(`/reports/${encodeURIComponent(pdfFile)}`) : undef
         <div class="border border-line bg-white lg:sticky lg:top-24">
           <dl class="divide-y divide-line text-sm">
             <div class="flex items-center justify-between gap-4 px-5 py-4">
-              <dt class="text-muted">투자의견</dt>
+              <dt lang="en" class="font-display text-xs font-bold tracking-[0.12em] text-navy uppercase">Rating</dt>
               <dd>{opinion ? <OpinionBadge opinion={opinion} /> : <span class="text-muted">—</span>}</dd>
             </div>
             <div class="flex items-center justify-between gap-4 px-5 py-4">
-              <dt class="text-muted">발행일</dt>
+              <dt lang="en" class="font-display text-xs font-bold tracking-[0.12em] text-navy uppercase">Published</dt>
               <dd class="num font-bold">{iso ? <time datetime={iso}>{formatDate(date)}</time> : formatDate(date)}</dd>
             </div>
             <div class="flex items-center justify-between gap-4 px-5 py-4">
-              <dt class="text-muted">분류</dt>
+              <dt lang="en" class="font-display text-xs font-bold tracking-[0.12em] text-navy uppercase">Category</dt>
               <dd class="font-bold">{category}</dd>
             </div>
             <div class="flex items-center justify-between gap-4 px-5 py-4">
-              <dt class="text-muted">작성 팀</dt>
+              <dt lang="en" class="font-display text-xs font-bold tracking-[0.12em] text-navy uppercase">Team</dt>
               <dd class="font-bold">{team}</dd>
             </div>
           </dl>
@@ -76,12 +76,12 @@ const pdfHref = pdfFile ? url(`/reports/${encodeURIComponent(pdfFile)}`) : undef
             {pdfHref ? (
               <a href={pdfHref} class="btn-primary w-full" download>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14" /></svg>
-                PDF 다운로드
+                <span lang="en">Download PDF</span>
               </a>
             ) : (
-              <p class="border border-dashed border-line px-4 py-3 text-center text-sm text-muted">PDF 원문은 준비 중입니다.</p>
+              <p class="border border-dashed border-line px-4 py-3 text-center text-sm text-muted"><span lang="en">PDF coming soon</span></p>
             )}
-            <a href={url('/research')} class="btn-outline w-full">목록으로</a>
+            <a href={url('/research')} class="btn-outline w-full" lang="en">← Back to List</a>
           </div>
         </div>
       </aside>
@@ -94,9 +94,8 @@ const pdfHref = pdfFile ? url(`/reports/${encodeURIComponent(pdfFile)}`) : undef
         <div class="prose-report mt-4">
           <Content />
         </div>
-        <p class="mt-14 border-t border-line pt-6 text-xs leading-6 text-muted">
-          본 자료는 KFEC 학회원이 학습 목적으로 작성한 참고 자료이며, 특정 종목에 대한 투자 권유가 아닙니다.
-          투자 판단과 그 결과에 대한 책임은 투자자 본인에게 있습니다.
+        <p class="mt-14 border-t border-line pt-6 text-xs text-muted">
+          본 자료는 학습 목적의 참고 자료이며 투자 권유가 아닙니다.
         </p>
       </div>
     </div>

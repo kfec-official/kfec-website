@@ -6,23 +6,19 @@ import { getReports } from '../../lib/utils';
 
 const reports = await getReports();
 const filters = [
-  { label: '전체', value: 'all' },
-  { label: '기업분석', value: '기업분석' },
-  { label: '산업분석', value: '산업분석' },
+  { label: 'All', value: 'all' },
+  { label: 'Company', value: '기업분석' },
+  { label: 'Industry', value: '산업분석' },
 ];
 const count = (v: string) =>
   v === 'all' ? reports.length : reports.filter((r) => r.data.category === v).length;
 ---
 
 <BaseLayout
-  title="리서치"
-  description="KFEC 리서치팀이 작성한 기업분석·산업분석 보고서 목록입니다."
+  title="Research"
+  description="KFEC 학회원이 직접 작성한 기업분석·산업분석 보고서 목록입니다."
 >
-  <PageHeader
-    eyebrow="Research"
-    title="리서치"
-    lead="학회원이 직접 작성한 기업분석·산업분석 보고서입니다. 학습 목적의 참고 자료이며 투자 권유가 아닙니다."
-  />
+  <PageHeader title="Research" lead="학회원이 직접 작성한 기업분석·산업분석 보고서입니다." />
 
   <section class="container-page py-12 sm:py-16" aria-label="보고서 목록">
     <div class="flex flex-wrap items-end justify-between gap-4 border-b border-line">
@@ -32,13 +28,13 @@ const count = (v: string) =>
             type="button"
             data-filter={f.value}
             aria-pressed={i === 0 ? 'true' : 'false'}
-            class="border-b-2 border-transparent pb-3 text-[0.9375rem] font-bold text-muted transition-colors hover:text-ink aria-pressed:border-navy aria-pressed:text-navy"
+            lang="en" class="border-b-2 border-transparent pb-3 font-display text-base font-bold text-muted transition-colors hover:text-ink aria-pressed:border-navy aria-pressed:text-navy"
           >
             {f.label} <span class="num font-normal">{count(f.value)}</span>
           </button>
         ))}
       </div>
-      <p class="pb-3 text-xs text-muted">최신 발행순</p>
+      <p class="pb-3 font-display text-xs tracking-wide text-muted" lang="en">Latest first</p>
     </div>
 
     <p class="sr-only" aria-live="polite" id="report-status"></p>

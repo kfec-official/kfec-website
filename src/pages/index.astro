@@ -29,15 +29,13 @@ const awards = getAwards().slice(0, 3);
           class="h-auto w-full max-w-[17rem] sm:max-w-[21rem]"
           fetchpriority="high"
         />
-        <h1 id="hero-title" class="mt-12 font-serif text-[2.25rem] font-bold leading-[1.25] sm:text-5xl lg:text-[3.25rem]">
-          읽고, 분석하고,<br />직접 운용합니다.
+        <h1 id="hero-title" lang="en" class="mt-12 font-display text-[2.75rem] font-bold leading-[1.1] sm:text-6xl lg:text-[4.25rem]">
+          Read. Analyze.<br />Invest.
         </h1>
-        <p class="mt-6 max-w-xl text-base leading-7 text-on-navy sm:text-lg sm:leading-8">
-          {site.koreanName}는 경제·금융 분야의 학문적 탐구를 바탕으로 실무 역량을 키우는 학회입니다.
-        </p>
+        <p class="mt-6 text-base text-on-navy sm:text-lg">읽고, 분석하고, 직접 운용합니다.</p>
         <div class="mt-9 flex flex-wrap gap-3">
-          <a href={url('/research')} class="btn-light">리서치 보기</a>
-          <a href={url('/join')} class="btn-outline-light">가입 안내</a>
+          <a href={url('/research')} class="btn-light" lang="en">View Research</a>
+          <a href={url('/join')} class="btn-outline-light" lang="en">Join KFEC</a>
         </div>
       </div>
 
@@ -61,7 +59,7 @@ const awards = getAwards().slice(0, 3);
               <span class="text-xs text-on-navy">{latest.data.team}</span>
             </div>
             <a href={url(`/research/${latest.id}/`)} class="text-sm font-bold text-white hover:underline underline-offset-4" aria-hidden="true" tabindex="-1">
-              리포트 읽기 →
+              <span lang="en">Read Report →</span>
             </a>
           </div>
         </aside>
@@ -71,15 +69,15 @@ const awards = getAwards().slice(0, 3);
     <div class="border-t border-white/15">
       <dl class="container-page grid divide-y divide-white/15 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
         <div class="py-5 sm:pr-8">
-          <dt class="text-xs text-on-navy">정규 활동</dt>
+          <dt lang="en" class="font-display text-xs tracking-[0.12em] text-on-navy uppercase">Weekly Session</dt>
           <dd class="num mt-1 font-bold">{site.meeting}</dd>
         </div>
         <div class="py-5 sm:px-8">
-          <dt class="text-xs text-on-navy">가입 자격</dt>
+          <dt lang="en" class="font-display text-xs tracking-[0.12em] text-on-navy uppercase">Eligibility</dt>
           <dd class="mt-1 font-bold">경성대학교 학생 누구나</dd>
         </div>
         <div class="py-5 sm:pl-8">
-          <dt class="text-xs text-on-navy">소속</dt>
+          <dt lang="en" class="font-display text-xs tracking-[0.12em] text-on-navy uppercase">Affiliation</dt>
           <dd class="mt-1 font-bold">{site.affiliation}</dd>
         </div>
       </dl>
@@ -88,43 +86,28 @@ const awards = getAwards().slice(0, 3);
 
   <!-- 소개 -->
   <section class="bg-white" aria-labelledby="about-title">
-    <div class="container-page grid gap-10 py-16 md:grid-cols-[1fr_1.4fr] md:py-20">
-      <div>
-        <p class="eyebrow">About KFEC</p>
-        <h2 id="about-title" class="mt-2 font-serif text-2xl font-bold sm:text-[1.75rem]">
-          학문적 탐구에서<br />실무 역량까지
-        </h2>
-      </div>
-      <div>
-        <p class="text-base leading-8 text-ink sm:text-lg">
-          경제·금융 분야의 학문적 탐구를 바탕으로 실무 역량을 강화하고, 교수진·현직 선배와의 네트워크로
-          차세대 금융 전문 인재를 양성합니다.
-        </p>
-        <ul class="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-6">
-          {[
-            { no: '01', en: 'Research', title: '리서치', desc: '기업·산업 분석 보고서' },
-            { no: '02', en: 'Competition', title: '대회 참가', desc: '교내외 금융·경제 대회' },
-            { no: '03', en: 'Network', title: '네트워크', desc: '교수진·현직 선배와의 교류' },
-          ].map((p) => (
-            <li class="border-t-2 border-navy pt-4">
-              <p class="flex items-baseline justify-between">
-                <span class="num font-display text-2xl font-black text-navy">{p.no}</span>
-                <span class="font-display text-xs tracking-[0.15em] text-muted uppercase" lang="en">{p.en}</span>
-              </p>
-              <p class="mt-3 font-bold">{p.title}</p>
-              <p class="mt-1 text-sm text-muted">{p.desc}</p>
-            </li>
-          ))}
-        </ul>
-        <a href={url('/about')} class="link mt-8 inline-block text-sm font-bold">학회 소개 자세히 보기</a>
-      </div>
+    <div class="container-page py-16 md:py-20">
+      <SectionHeading title="About KFEC" desc="학문적 탐구와 실무 역량, 네트워크로 차세대 금융 인재를 양성합니다." id="about-title" moreHref="/about" moreLabel="More" />
+      <ul class="mt-10 grid gap-10 md:grid-cols-3 md:gap-8">
+        {[
+          { no: '01', title: 'Research', desc: '기업분석·산업분석 보고서 작성' },
+          { no: '02', title: 'Competition', desc: '교내외 금융·경제 대회 참가' },
+          { no: '03', title: 'Network', desc: '교수진·현직 선배와의 교류' },
+        ].map((p) => (
+          <li class="border-t-2 border-navy pt-5">
+            <p class="num font-display text-3xl font-black text-navy">{p.no}</p>
+            <h3 lang="en" class="mt-3 font-display text-2xl font-bold">{p.title}</h3>
+            <p class="mt-1.5 text-sm text-muted">{p.desc}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
   <!-- 최신 리서치 -->
   <section aria-labelledby="research-title">
     <div class="container-page py-16 md:py-20">
-      <SectionHeading eyebrow="Research" title="최신 리서치" id="research-title" moreHref="/research" />
+      <SectionHeading title="Latest Research" desc="학회원이 직접 작성한 기업분석·산업분석 보고서" id="research-title" moreHref="/research" />
       <ul class="mt-8 divide-y divide-line border border-line bg-white">
         {reports.map((r) => <li><ReportRow report={r} /></li>)}
       </ul>
@@ -134,7 +117,7 @@ const awards = getAwards().slice(0, 3);
   <!-- 최근 수상 -->
   <section class="bg-white" aria-labelledby="awards-title">
     <div class="container-page py-16 md:py-20">
-      <SectionHeading eyebrow="Achievements" title="최근 수상 내역" id="awards-title" moreHref="/awards" />
+      <SectionHeading title="Recent Awards" desc="교내외 금융·경제 대회 수상 내역" id="awards-title" moreHref="/awards" />
       <div class="mt-8">
         <AwardsByYear awards={awards} />
       </div>
@@ -145,10 +128,10 @@ const awards = getAwards().slice(0, 3);
   <section class="bg-navy text-white" aria-labelledby="join-title">
     <div class="container-page flex flex-col gap-6 py-14 md:flex-row md:items-center md:justify-between">
       <div>
-        <h2 id="join-title" class="font-serif text-2xl font-bold">함께 읽고 분석할 학회원을 찾습니다.</h2>
+        <h2 id="join-title" lang="en" class="font-display text-3xl font-bold">Join KFEC</h2>
         <p class="mt-2 text-on-navy">경성대학교 학생이라면 누구나 지원할 수 있습니다.</p>
       </div>
-      <a href={url('/join')} class="btn-light shrink-0">가입 안내 보기</a>
+      <a href={url('/join')} class="btn-light shrink-0" lang="en">Recruitment →</a>
     </div>
   </section>
 </BaseLayout>

@@ -5,7 +5,7 @@ import site from '../data/site.json';
 const nav = [
   { label: 'ABOUT', href: '/about', ko: '학회 소개' },
   { label: 'RESEARCH', href: '/research', ko: '리서치' },
-  { label: 'ACHIEVEMENTS', href: '/awards', ko: '수상·Alumni 현황' },
+  { label: 'ACHIEVEMENTS', href: '/awards', ko: '수상 · Alumni' },
   { label: 'RECRUITMENT', href: '/join', ko: '가입 안내' },
 ];
 
@@ -21,7 +21,7 @@ const isActive = (href: string) =>
     <ul class="flex items-center gap-4">
       <li>
         <a href={site.cafeUrl} target="_blank" rel="noopener noreferrer" class="hover:text-white hover:underline underline-offset-4">
-          네이버 카페<span class="sr-only"> (새 창)</span>
+          <span lang="en">Naver Cafe</span><span class="sr-only"> (새 창)</span>
         </a>
       </li>
       <li aria-hidden="true" class="h-3 w-px bg-white/25"></li>

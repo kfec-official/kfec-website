@@ -11,33 +11,28 @@ const alumni = getAlumni();
 ---
 
 <BaseLayout
-  title="수상 내역 · Alumni 현황"
+  title="Achievements"
   description="KFEC 학회원들의 교내외 금융·경제 대회 수상 내역과 Alumni 진출·인턴·현장실습 현황입니다."
 >
-  <PageHeader
-    eyebrow="Achievements"
-    title="수상 내역 · Alumni 현황"
-    lead="학회원들이 교내외 대회에서 거둔 성과와, 금융 현장으로 진출한 선배·인턴·현장실습 현황입니다."
-  >
+  <PageHeader title="Achievements" lead="교내외 대회 수상 내역과 Alumni 진출 현황입니다.">
     <nav aria-label="이 페이지 안 바로가기" class="mt-8">
-      <ul class="flex flex-wrap gap-2">
-        <li><a href="#awards" class="btn-outline-light px-4 py-2">수상 내역</a></li>
-        <li><a href="#alumni" class="btn-outline-light px-4 py-2">Alumni·실습 현황</a></li>
+      <ul class="flex flex-wrap gap-2" lang="en">
+        <li><a href="#awards" class="btn-outline-light px-4 py-2">Awards</a></li>
+        <li><a href="#alumni" class="btn-outline-light px-4 py-2">Alumni</a></li>
       </ul>
     </nav>
   </PageHeader>
 
-  <section class="container-page py-12 sm:py-16" aria-labelledby="awards">
-    <SectionHeading eyebrow="Awards" title="수상 내역" id="awards" />
+  <section class="container-page py-14 sm:py-20" aria-labelledby="awards">
+    <SectionHeading title="Awards" desc="교내외 금융·경제 대회 수상 내역" id="awards" />
     <div class="mt-10">
       <AwardsByYear awards={awards} />
     </div>
   </section>
 
   <section class="bg-white" aria-labelledby="alumni">
-    <div class="container-page py-12 sm:py-16">
-      <SectionHeading eyebrow="Alumni" title="Alumni·실습 현황" id="alumni" />
-      <p class="mt-4 text-sm text-muted">KFEC 출신 선배들의 진출처와 인턴·현장실습 중인 학회원 현황입니다.</p>
+    <div class="container-page py-14 sm:py-20">
+      <SectionHeading title="Alumni" desc="선배들의 진출처와 인턴·현장실습 현황" id="alumni" />
       <div class="mt-10">
         <AlumniByYear list={alumni} />
       </div>

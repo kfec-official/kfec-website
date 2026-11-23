@@ -5,7 +5,7 @@ import site from '../data/site.json';
 const menu = [
   { label: 'ABOUT', ko: '학회 소개', href: '/about' },
   { label: 'RESEARCH', ko: '리서치', href: '/research' },
-  { label: 'ACHIEVEMENTS', ko: '수상·Alumni 현황', href: '/awards' },
+  { label: 'ACHIEVEMENTS', ko: '수상 · Alumni', href: '/awards' },
   { label: 'RECRUITMENT', ko: '가입 안내', href: '/join' },
 ];
 ---
@@ -23,7 +23,7 @@ const menu = [
       />
       <p class="mt-6 text-sm font-bold text-white">{site.koreanName}</p>
       <p class="mt-1 text-sm">{site.affiliation}</p>
-      <p class="num mt-1 text-sm">정규 활동 · {site.meeting}</p>
+      <p class="num mt-1 text-sm"><span lang="en">Weekly Session</span> · {site.meeting}</p>
     </div>
 
     <nav aria-label="하단 메뉴">
@@ -45,7 +45,7 @@ const menu = [
       <ul class="mt-4 space-y-2.5 text-sm">
         <li>
           <a href={site.cafeUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:text-white hover:underline underline-offset-4">
-            네이버 카페<span class="sr-only"> (새 창)</span>
+            <span lang="en">Naver Cafe</span><span class="sr-only"> (새 창)</span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
           </a>
         </li>

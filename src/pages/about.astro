@@ -4,64 +4,58 @@ import PageHeader from '../components/PageHeader.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import site from '../data/site.json';
 import { url } from '../lib/utils';
+
+const facts = [
+  { label: 'Name', value: `${site.koreanName} (${site.name})` },
+  { label: 'Affiliation', value: site.affiliation },
+  { label: 'Weekly Session', value: site.meeting },
+  { label: 'Eligibility', value: '경성대학교 학생 누구나' },
+];
+
+const pillars = [
+  { no: '01', title: 'Research', desc: '기업분석·산업분석 보고서를 작성합니다.' },
+  { no: '02', title: 'Competition', desc: '교내외 금융·경제 대회에 참가합니다.' },
+  { no: '03', title: 'Network', desc: '교수진·현직 선배와 교류합니다.' },
+];
 ---
 
 <BaseLayout
-  title="학회 소개"
-  description={`${site.koreanName} KFEC의 목적과 소속을 소개합니다. ${site.affiliation} 소속.`}
+  title="About"
+  description={`${site.koreanName} KFEC 소개. ${site.affiliation} 소속 금융투자학회입니다.`}
 >
-  <PageHeader eyebrow="About" title="학회 소개" lead={`${site.affiliation} 소속 금융투자학회입니다.`} />
+  <PageHeader title="About" lead={`${site.affiliation} 소속 금융투자학회`} />
 
-  <section class="container-page py-14 sm:py-16" aria-labelledby="purpose-title">
-    <div class="grid gap-10 md:grid-cols-[1fr_1.6fr]">
+  <section class="container-page py-14 sm:py-20" aria-labelledby="purpose-title">
+    <SectionHeading title="Purpose" id="purpose-title" />
+    <div class="mt-10 grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
       <div>
-        <p class="eyebrow">Purpose</p>
-        <h2 id="purpose-title" class="mt-2 font-serif text-2xl font-bold sm:text-[1.75rem]">목적</h2>
-      </div>
-      <div>
-        <p class="font-serif text-xl font-bold leading-9 text-ink sm:text-2xl sm:leading-10">
-          경제·금융 분야의 학문적 탐구를 바탕으로 실무 역량을 강화하고, 교수진·현직 선배와의 네트워크로
-          차세대 금융 전문 인재를 양성합니다.
+        <p lang="en" class="font-display text-2xl font-bold leading-snug text-ink sm:text-[2rem] sm:leading-tight">
+          Building the next generation of finance professionals through academic inquiry, practical skills, and a
+          network of faculty and alumni.
         </p>
-        <dl class="mt-10 border-t border-line">
-          <div class="grid grid-cols-[7rem_1fr] gap-4 border-b border-line py-4">
-            <dt class="text-sm text-muted">학회명</dt>
-            <dd class="font-medium">{site.koreanName} <span class="font-display">({site.name} · {site.fullName})</span></dd>
-          </div>
-          <div class="grid grid-cols-[7rem_1fr] gap-4 border-b border-line py-4">
-            <dt class="text-sm text-muted">소속</dt>
-            <dd class="font-medium">{site.affiliation}</dd>
-          </div>
-          <div class="grid grid-cols-[7rem_1fr] gap-4 border-b border-line py-4">
-            <dt class="text-sm text-muted">정규 활동</dt>
-            <dd class="num font-medium">{site.meeting}</dd>
-          </div>
-          <div class="grid grid-cols-[7rem_1fr] gap-4 border-b border-line py-4">
-            <dt class="text-sm text-muted">가입 자격</dt>
-            <dd class="font-medium">경성대학교 학생이라면 누구나 가입할 수 있습니다.</dd>
-          </div>
-        </dl>
-        <a href={url('/join')} class="btn-primary mt-8">가입 안내 보기</a>
+        <p class="mt-6 text-base text-muted">학문적 탐구와 실무 역량, 교수진·현직 선배와의 네트워크로 차세대 금융 인재를 양성합니다.</p>
+        <a href={url('/join')} class="btn-primary mt-10" lang="en">How to Join →</a>
       </div>
+      <dl class="border-t border-line">
+        {facts.map((f) => (
+          <div class="border-b border-line py-4">
+            <dt lang="en" class="font-display text-xs font-bold tracking-[0.15em] text-navy uppercase">{f.label}</dt>
+            <dd class="num mt-1.5 font-medium">{f.value}</dd>
+          </div>
+        ))}
+      </dl>
     </div>
   </section>
 
   <section class="bg-white" aria-labelledby="activities-title">
-    <div class="container-page py-14 sm:py-16">
-      <SectionHeading eyebrow="What We Do" title="주요 활동" id="activities-title" />
+    <div class="container-page py-14 sm:py-20">
+      <SectionHeading title="What We Do" id="activities-title" />
       <ul class="mt-10 grid gap-10 md:grid-cols-3 md:gap-8">
-        {[
-          { no: '01', en: 'Research', title: '리서치', desc: '기업분석·산업분석 보고서를 작성합니다.' },
-          { no: '02', en: 'Competition', title: '대회 참가', desc: '교내외 금융·경제 대회에 참가합니다.' },
-          { no: '03', en: 'Network', title: '네트워크', desc: '교수진·현직 선배와 교류합니다.' },
-        ].map((p) => (
+        {pillars.map((p) => (
           <li class="border-t-2 border-navy pt-5">
-            <p class="flex items-baseline justify-between">
-              <span class="num font-display text-4xl font-black text-navy">{p.no}</span>
-              <span class="font-display text-xs tracking-[0.15em] text-muted uppercase" lang="en">{p.en}</span>
-            </p>
-            <h3 class="mt-4 font-serif text-xl font-bold">{p.title}</h3>
-            <p class="mt-2 text-sm leading-6 text-muted">{p.desc}</p>
+            <p class="num font-display text-4xl font-black text-navy">{p.no}</p>
+            <h3 lang="en" class="mt-4 font-display text-2xl font-bold">{p.title}</h3>
+            <p class="mt-2 text-sm text-muted">{p.desc}</p>
           </li>
         ))}
       </ul>
