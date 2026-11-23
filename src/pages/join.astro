@@ -9,6 +9,7 @@ const info = [
   { label: '가입 자격', value: '경성대학교 학생 누구나' },
   { label: '학회비', value: site.fee, note: site.feeExemption },
   { label: '정규 활동', value: site.meeting },
+  { label: '활동 기간', value: '1년 이상 활동 필수', note: '수료를 위한 필수 조건' },
 ];
 ---
 
@@ -20,7 +21,7 @@ const info = [
 
   <section class="container-page py-14 sm:py-20" aria-labelledby="info-title">
     <SectionHeading title="Information" id="info-title" />
-    <dl class="mt-8 grid gap-px border border-line bg-line md:grid-cols-3">
+    <dl class="mt-8 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
       {info.map((i) => (
         <div class="bg-white p-6 sm:p-7">
           <dt class="text-sm font-bold text-navy">{i.label}</dt>
