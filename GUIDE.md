@@ -304,8 +304,6 @@ draft: true
 
 큰따옴표 안의 글자만 바꾸고 → **Commit changes...** → **Commit changes**
 
----
-
 ### 주요 활동 목록 (About KFEC · What We Do)
 **[주요 활동 고치기 화면 열기](https://github.com/kfec-official/kfec-website/edit/main/src/data/activities.json)**
 
