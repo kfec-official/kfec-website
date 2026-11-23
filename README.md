@@ -14,7 +14,7 @@
 | 리포트 PDF | `public/reports/` 폴더 |
 | 수상 내역 | `src/data/awards.json` |
 | 실전 자산운용 성과 | `src/data/fund.json` |
-| 정규 활동 시간, 학회비, 카페 주소 | `src/data/site.json` |
+| 정규 활동 시간, 학회비, 카페·인스타그램 주소 | `src/data/site.json` |
 
 > 대괄호로 된 글자(`[기업명]`, `[대회명]`, `[±0.00%]` 등)는 **아직 채우지 않은 자리표시**입니다. 실제 내용으로 바꿔 주세요.
 
@@ -119,7 +119,7 @@ pdf: "2026-12-01-samsung.pdf"        # PDF 파일 이름 (없으면 이 줄을 �
 - 위 예시 숫자는 형식 설명용입니다. 실제 수치로 적어 주세요.
 
 ## 4. 기타 정보 (`src/data/site.json`)
-정규 활동 시간(`meeting`), 학회비(`fee`), 면제 대상(`feeExemption`), 네이버 카페 주소(`cafeUrl`)를 바꿀 수 있습니다.
+정규 활동 시간(`meeting`), 학회비(`fee`), 면제 대상(`feeExemption`), 네이버 카페 주소(`cafeUrl`), 인스타그램 계정(`instagram`, `instagramUrl`)을 바꿀 수 있습니다.
 
 ### 저장했는데 사이트가 안 바뀌어요
 저장소의 **Actions** 탭을 확인하세요. 빨간 ✕ 표시가 있다면 대부분 아래 중 하나입니다.

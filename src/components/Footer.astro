@@ -19,14 +19,23 @@ import site from '../data/site.json';
         KFEC의 리서치 자료는 학습 목적의 참고 자료이며 투자 권유가 아닙니다.
       </p>
     </div>
-    <div class="md:text-right">
+    <div class="flex flex-col items-start gap-3 md:items-end">
       <a
         href={site.cafeUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 border border-on-navy px-4 py-2.5 text-sm font-medium text-white hover:bg-white hover:text-ink"
+        class="inline-flex min-w-[13rem] items-center justify-between gap-2 border border-on-navy px-4 py-2.5 text-sm font-medium text-white hover:bg-white hover:text-ink"
       >
         네이버 카페 바로가기<span class="sr-only"> (새 창)</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
+      </a>
+      <a
+        href={site.instagramUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex min-w-[13rem] items-center justify-between gap-2 border border-on-navy px-4 py-2.5 text-sm font-medium text-white hover:bg-white hover:text-ink"
+      >
+        인스타그램 {site.instagram}<span class="sr-only"> (새 창)</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
       </a>
     </div>
