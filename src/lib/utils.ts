@@ -1,6 +1,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import awardsData from '../data/awards.json';
-import jobsData from '../data/jobs.json';
+import alumniData from '../data/alumni.json';
 
 /** 배포 경로(base)를 반영한 내부 링크를 만듭니다. */
 export function url(path = '/'): string {
@@ -78,38 +78,30 @@ export function formatPeriod(start: string, end: string): string {
   return `${start} – ${end}`;
 }
 
-export type Job = {
-  type: string;
-  company: string;
-  title: string;
-  /** "2026-12-15" 형식, "상시", 또는 자리표시 */
-  deadline: string;
-  url: string;
-  note?: string;
+export type Alumni = {
+  /** 재직 / 인턴 / 현장실습 등 */
+  status: string;
+  organization: string;
+  role: string;
+  year: string | number;
+  member?: string;
 };
 
-/** 마감일 정렬 키: 날짜 → 그 날짜, 상시 → 날짜 있는 공고 뒤, 자리표시 → 맨 뒤 */
-function deadlineKey(d: string): number {
-  if (/^\d{4}-\d{2}-\d{2}$/.test(d.trim())) return new Date(`${d.trim()}T00:00:00Z`).getTime();
-  if (isPlaceholder(d)) return Number.MAX_SAFE_INTEGER;
-  return Number.MAX_SAFE_INTEGER - 1;
+/** Alumni·실습 현황을 최신 연도순(자리표시 연도는 맨 뒤)으로 정렬합니다. 같은 해는 파일 순서를 따릅니다. */
+export function getAlumni(): Alumni[] {
+  return (alumniData as Alumni[])
+    .map((a, i) => ({ a, i, y: Number.parseInt(String(a.year), 10) }))
+    .sort((x, y) => (Number.isNaN(y.y) ? -Infinity : y.y) - (Number.isNaN(x.y) ? -Infinity : x.y) || x.i - y.i)
+    .map(({ a }) => a);
 }
 
-/** 마감일이 가까운 순으로 정렬합니다. (지난 공고는 화면에서 '마감'으로 표시되고 뒤로 이동) */
-export function getJobs(): Job[] {
-  const todayKst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
-  const closed = (d: string) => isDateString(d) && d.trim() < todayKst;
-  return (jobsData as Job[])
-    .map((j, i) => ({ j, i }))
-    .sort(
-      (a, b) =>
-        Number(closed(a.j.deadline)) - Number(closed(b.j.deadline)) ||
-        deadlineKey(a.j.deadline) - deadlineKey(b.j.deadline) ||
-        a.i - b.i,
-    )
-    .map(({ j }) => j);
-}
-
-export function isDateString(d: string): boolean {
-  return /^\d{4}-\d{2}-\d{2}$/.test(d.trim());
+/** 구분별 인원 수 (자리표시는 세지 않음) */
+export function countAlumniByStatus(list: Alumni[]): { status: string; count: number }[] {
+  const map = new Map<string, number>();
+  for (const a of list) {
+    if (isPlaceholder(a.status)) continue;
+    const key = a.status.trim();
+    map.set(key, (map.get(key) ?? 0) + 1);
+  }
+  return Array.from(map, ([status, count]) => ({ status, count }));
 }

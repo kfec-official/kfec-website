@@ -4,14 +4,14 @@ import SectionHeading from '../components/SectionHeading.astro';
 import ReportCard from '../components/ReportCard.astro';
 import AwardsTable from '../components/AwardsTable.astro';
 import FundStats from '../components/FundStats.astro';
-import JobList from '../components/JobList.astro';
-import { url, getReports, getAwards, getJobs, formatPeriod } from '../lib/utils';
+import AlumniTable from '../components/AlumniTable.astro';
+import { url, getReports, getAwards, getAlumni, formatPeriod } from '../lib/utils';
 import site from '../data/site.json';
 import fund from '../data/fund.json';
 
 const reports = (await getReports()).slice(0, 3);
 const awards = getAwards().slice(0, 3);
-const jobs = getJobs().slice(0, 3);
+const alumni = getAlumni().slice(0, 3);
 ---
 
 <BaseLayout
@@ -118,12 +118,12 @@ const jobs = getJobs().slice(0, 3);
     </div>
   </section>
 
-  <!-- 채용·인턴 -->
-  <section class="bg-white" aria-labelledby="careers-title">
+  <!-- Alumni·실습 현황 -->
+  <section class="bg-white" aria-labelledby="alumni-title">
     <div class="container-page py-16 md:py-20">
-      <SectionHeading eyebrow="Careers" title="채용·인턴 정보" id="careers-title" moreHref="/careers" />
+      <SectionHeading eyebrow="Alumni" title="Alumni·실습 현황" id="alumni-title" moreHref="/alumni" />
       <div class="mt-8">
-        <JobList jobs={jobs} />
+        <AlumniTable list={alumni} caption="최근 Alumni·실습 현황 3건" />
       </div>
     </div>
   </section>
