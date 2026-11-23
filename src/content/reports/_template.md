@@ -10,7 +10,7 @@ date: 2026-12-01            # 발행일 (YYYY-MM-DD)
 summary: "목록 카드에 보일 2줄 요약"
 opinion: 매수               # 투자의견 (예: 매수, 중립, 비중확대) — 없으면 줄 전체 삭제
 team: 리서치 1팀            # 작성 팀
-# pdf: "2026-12-01-samsung.pdf"   # public/reports/ 에 PDF를 넣었다면 맨 앞 # 을 지우세요
+# PDF는 public/reports/ 폴더에 이 파일과 같은 이름(예: 2026-12-01-samsung.pdf)으로 올리면 자동 연결됩니다.
 ---
 
 ## 핵심 요약

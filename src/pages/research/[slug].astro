@@ -1,5 +1,7 @@
 ---
 import { render } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import OpinionBadge from '../../components/OpinionBadge.astro';
 import { url, getReports, formatDate, isoDate, isPlaceholder } from '../../lib/utils';
@@ -13,7 +15,17 @@ const { report } = Astro.props;
 const { title, category, date, summary, opinion, team, pdf } = report.data;
 const { Content } = await render(report);
 const iso = isoDate(date);
-const pdfHref = pdf && !isPlaceholder(pdf) ? url(`/reports/${pdf.replace(/^\/?(reports\/)?/, '')}`) : undefined;
+// PDF 찾기: ① pdf: 항목에 적은 파일 → ② 리포트 파일과 같은 이름의 PDF (예: 2026-11-20-cosmetics.pdf)
+// 실제로 public/reports/ 에 있는 파일일 때만 다운로드 버튼을 보여 줍니다.
+const reportsDir = path.join(process.cwd(), 'public', 'reports');
+const existing = fs.existsSync(reportsDir) ? fs.readdirSync(reportsDir) : [];
+const findPdf = (name: string) => existing.find((f) => f.toLowerCase() === name.toLowerCase());
+const wanted = pdf && !isPlaceholder(pdf) ? pdf.replace(/^\/?(public\/)?(reports\/)?/, '').trim() : undefined;
+const pdfFile = (wanted && findPdf(wanted)) || findPdf(`${report.id}.pdf`);
+if (wanted && !findPdf(wanted)) {
+  console.warn(`[리포트 ${report.id}] pdf: "${wanted}" 파일을 public/reports/ 에서 찾지 못했습니다.`);
+}
+const pdfHref = pdfFile ? url(`/reports/${encodeURIComponent(pdfFile)}`) : undefined;
 ---
 
 <BaseLayout title={title} description={summary} type="article">

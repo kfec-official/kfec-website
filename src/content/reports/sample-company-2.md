@@ -5,7 +5,7 @@ date: "[YYYY-MM-DD]"
 summary: "[리포트의 핵심 내용을 2줄 이내로 요약하세요.]"
 opinion: "[투자의견]"
 team: "[작성 팀]"
-# pdf: "[파일이름].pdf"
+# PDF는 public/reports/ 폴더에 이 파일과 같은 이름(sample-company-2.pdf)으로 올리면 자동 연결됩니다.
 ---
 
 ## 핵심 요약
