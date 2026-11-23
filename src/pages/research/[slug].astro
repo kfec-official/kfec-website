@@ -32,13 +32,13 @@ const pdfHref = pdfFile ? url(`/reports/${encodeURIComponent(pdfFile)}`) : undef
   <article>
     <header class="bg-navy text-white on-dark">
       <div class="container-page py-12 sm:py-16">
-        <nav aria-label="현재 위치" class="font-display text-xs tracking-[0.12em] text-on-navy">
+        <nav aria-label="현재 위치" class="font-display text-xs tracking-[0.12em] text-on-navy uppercase">
           <ol class="flex flex-wrap items-center gap-2">
             <li><a href={url('/')} class="hover:text-white hover:underline underline-offset-4">Home</a></li>
             <li aria-hidden="true">/</li>
             <li><a href={url('/research')} class="hover:text-white hover:underline underline-offset-4">Research</a></li>
             <li aria-hidden="true">/</li>
-            <li><span aria-current="page">{category}</span></li>
+            <li><span aria-current="page" class="font-sans tracking-normal">{category}</span></li>
           </ol>
         </nav>
         <p class="mt-8 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-on-navy">
@@ -56,19 +56,19 @@ const pdfHref = pdfFile ? url(`/reports/${encodeURIComponent(pdfFile)}`) : undef
         <div class="border border-line bg-white lg:sticky lg:top-24">
           <dl class="divide-y divide-line text-sm">
             <div class="flex items-center justify-between gap-4 px-5 py-4">
-              <dt lang="en" class="font-display text-xs font-bold tracking-[0.12em] text-navy uppercase">Rating</dt>
+              <dt class="text-muted">투자의견</dt>
               <dd>{opinion ? <OpinionBadge opinion={opinion} /> : <span class="text-muted">—</span>}</dd>
             </div>
             <div class="flex items-center justify-between gap-4 px-5 py-4">
-              <dt lang="en" class="font-display text-xs font-bold tracking-[0.12em] text-navy uppercase">Published</dt>
+              <dt class="text-muted">발행일</dt>
               <dd class="num font-bold">{iso ? <time datetime={iso}>{formatDate(date)}</time> : formatDate(date)}</dd>
             </div>
             <div class="flex items-center justify-between gap-4 px-5 py-4">
-              <dt lang="en" class="font-display text-xs font-bold tracking-[0.12em] text-navy uppercase">Category</dt>
+              <dt class="text-muted">분류</dt>
               <dd class="font-bold">{category}</dd>
             </div>
             <div class="flex items-center justify-between gap-4 px-5 py-4">
-              <dt lang="en" class="font-display text-xs font-bold tracking-[0.12em] text-navy uppercase">Team</dt>
+              <dt class="text-muted">작성 팀</dt>
               <dd class="font-bold">{team}</dd>
             </div>
           </dl>
@@ -76,12 +76,12 @@ const pdfHref = pdfFile ? url(`/reports/${encodeURIComponent(pdfFile)}`) : undef
             {pdfHref ? (
               <a href={pdfHref} class="btn-primary w-full" download>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14" /></svg>
-                <span lang="en">Download PDF</span>
+                PDF 다운로드
               </a>
             ) : (
-              <p class="border border-dashed border-line px-4 py-3 text-center text-sm text-muted"><span lang="en">PDF coming soon</span></p>
+              <p class="border border-dashed border-line px-4 py-3 text-center text-sm text-muted">PDF 준비 중</p>
             )}
-            <a href={url('/research')} class="btn-outline w-full" lang="en">← Back to List</a>
+            <a href={url('/research')} class="btn-outline w-full">목록으로</a>
           </div>
         </div>
       </aside>

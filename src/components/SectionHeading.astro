@@ -9,7 +9,7 @@ interface Props {
   moreHref?: string;
   moreLabel?: string;
 }
-const { title, desc, id, moreHref, moreLabel = 'View All' } = Astro.props;
+const { title, desc, id, moreHref, moreLabel = '전체 보기' } = Astro.props;
 ---
 
 <div class="flex flex-wrap items-end justify-between gap-4 border-b-2 border-navy pb-4">
@@ -18,7 +18,7 @@ const { title, desc, id, moreHref, moreLabel = 'View All' } = Astro.props;
     {desc && <p class="mt-2 text-sm text-muted">{desc}</p>}
   </div>
   {moreHref && (
-    <a href={url(moreHref)} lang="en" class="font-display text-sm font-bold tracking-wide text-navy hover:underline underline-offset-4">
+    <a href={url(moreHref)} class="text-sm font-bold text-navy hover:underline underline-offset-4">
       {moreLabel}<span class="sr-only"> — {title}</span> →
     </a>
   )}
