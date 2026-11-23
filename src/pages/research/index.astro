@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
-import ReportCard from '../../components/ReportCard.astro';
+import ReportRow from '../../components/ReportRow.astro';
 import { getReports } from '../../lib/utils';
 
 const reports = await getReports();
@@ -25,17 +25,20 @@ const count = (v: string) =>
   />
 
   <section class="container-page py-12 sm:py-16" aria-label="보고서 목록">
-    <div role="group" aria-label="분류 필터" class="flex flex-wrap gap-2 border-b border-line pb-6" id="report-filters">
-      {filters.map((f, i) => (
-        <button
-          type="button"
-          data-filter={f.value}
-          aria-pressed={i === 0 ? 'true' : 'false'}
-          class="border border-navy px-4 py-2 text-sm font-bold text-navy transition-colors hover:bg-navy/5 aria-pressed:bg-navy aria-pressed:text-white aria-pressed:hover:bg-navy-dark"
-        >
-          {f.label} <span class="num font-normal">({count(f.value)})</span>
-        </button>
-      ))}
+    <div class="flex flex-wrap items-end justify-between gap-4 border-b border-line">
+      <div role="group" aria-label="분류 필터" class="-mb-px flex gap-6" id="report-filters">
+        {filters.map((f, i) => (
+          <button
+            type="button"
+            data-filter={f.value}
+            aria-pressed={i === 0 ? 'true' : 'false'}
+            class="border-b-2 border-transparent pb-3 text-[0.9375rem] font-bold text-muted transition-colors hover:text-ink aria-pressed:border-navy aria-pressed:text-navy"
+          >
+            {f.label} <span class="num font-normal">{count(f.value)}</span>
+          </button>
+        ))}
+      </div>
+      <p class="pb-3 text-xs text-muted">최신 발행순</p>
     </div>
 
     <p class="sr-only" aria-live="polite" id="report-status"></p>
@@ -43,10 +46,10 @@ const count = (v: string) =>
     {reports.length === 0 ? (
       <p class="py-16 text-center text-muted">등록된 보고서가 없습니다.</p>
     ) : (
-      <ul class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3" id="report-list">
+      <ul class="mt-6 divide-y divide-line border border-line bg-white" id="report-list">
         {reports.map((r) => (
           <li data-category={r.data.category}>
-            <ReportCard report={r} headingLevel="h2" />
+            <ReportRow report={r} headingLevel="h2" />
           </li>
         ))}
       </ul>

@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import OpinionBadge from './OpinionBadge.astro';
+import { url, formatDate, isoDate } from '../lib/utils';
+
+interface Props {
+  report: CollectionEntry<'reports'>;
+  headingLevel?: 'h2' | 'h3';
+}
+const { report, headingLevel = 'h3' } = Astro.props;
+const Heading = headingLevel;
+const { title, category, date, summary, opinion, team } = report.data;
+const iso = isoDate(date);
+---
+
+<article data-category={category} class="group relative grid gap-3 px-5 py-6 transition-colors hover:bg-paper sm:px-6 md:grid-cols-[8.5rem_1fr_10rem] md:gap-8">
+  <div class="flex items-center gap-3 md:block">
+    <p class="num font-display text-lg font-bold text-ink">
+      {iso ? <time datetime={iso}>{formatDate(date)}</time> : formatDate(date)}
+    </p>
+    <p class="text-xs font-bold text-navy md:mt-1">{category}</p>
+  </div>
+  <div>
+    <Heading class="font-serif text-lg font-bold leading-snug text-ink sm:text-xl">
+      <a href={url(`/research/${report.id}/`)} class="after:absolute after:inset-0 group-hover:text-navy">{title}</a>
+    </Heading>
+    <p class="mt-2 line-clamp-2 text-sm leading-6 text-muted">{summary}</p>
+  </div>
+  <div class="flex items-center gap-3 md:flex-col md:items-end md:justify-center md:gap-2">
+    <OpinionBadge opinion={opinion} />
+    <p class="text-xs text-muted"><span class="sr-only">작성: </span>{team}</p>
+  </div>
+</article>

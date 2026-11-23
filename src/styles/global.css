@@ -40,7 +40,7 @@
 }
 
 @utility btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-bold transition-colors;
+  @apply inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-bold tracking-wide transition-colors;
 }
 @utility btn-primary {
   @apply btn bg-navy text-white hover:bg-navy-dark;
@@ -64,6 +64,9 @@
   }
   .eyebrow {
     @apply font-display text-xs font-bold uppercase tracking-[0.2em] text-navy;
+  }
+  .eyebrow-light {
+    @apply font-display text-xs font-bold uppercase tracking-[0.2em] text-on-navy;
   }
   .num {
     font-variant-numeric: lining-nums tabular-nums;

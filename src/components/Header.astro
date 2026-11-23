@@ -1,5 +1,6 @@
 ---
 import { url } from '../lib/utils';
+import site from '../data/site.json';
 
 const nav = [
   { label: 'ABOUT', href: '/about', ko: '학회 소개' },
@@ -14,17 +15,37 @@ const isActive = (href: string) =>
   !href.includes('#') && (current === href || current.startsWith(`${href}/`));
 ---
 
+<div class="bg-navy-dark text-on-navy on-dark">
+  <div class="container-page flex h-9 items-center justify-between text-xs">
+    <p>{site.affiliation}</p>
+    <ul class="flex items-center gap-4">
+      <li>
+        <a href={site.cafeUrl} target="_blank" rel="noopener noreferrer" class="hover:text-white hover:underline underline-offset-4">
+          네이버 카페<span class="sr-only"> (새 창)</span>
+        </a>
+      </li>
+      <li aria-hidden="true" class="h-3 w-px bg-white/25"></li>
+      <li>
+        <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" class="hover:text-white hover:underline underline-offset-4">
+          Instagram<span class="sr-only"> (새 창)</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
 <header class="sticky top-0 z-50 border-b border-line bg-white">
-  <div class="container-page flex h-16 items-center justify-between">
+  <div class="container-page flex h-[4.5rem] items-center justify-between">
     <a href={url('/')} class="flex items-center gap-3">
-      <img src={url('/images/kfec-mark.png')} alt="KFEC 홈" width="83" height="24" class="h-6 w-auto" />
-      <span class="hidden border-l border-line pl-3 text-sm font-medium text-muted sm:inline">
-        경성대학교 금융투자학회
+      <img src={url('/images/kfec-mark.png')} alt="KFEC 홈" width="97" height="28" class="h-7 w-auto" />
+      <span class="hidden border-l border-line pl-3 leading-tight sm:block">
+        <span class="block text-[0.8125rem] font-bold text-ink">경성대학교 금융투자학회</span>
+        <span class="block font-display text-[0.6875rem] tracking-[0.08em] text-muted" lang="en">Kyungsung Finance &amp; Economics Club</span>
       </span>
     </a>
 
     <nav aria-label="주 메뉴" class="hidden lg:block">
-      <ul class="flex items-center gap-1">
+      <ul class="flex items-center gap-2">
         {nav.map((item) => (
           <li>
             <a
@@ -33,7 +54,7 @@ const isActive = (href: string) =>
               class:list={[
                 'block px-3 py-2 font-display text-[0.8125rem] font-bold tracking-[0.12em] transition-colors hover:text-navy',
                 isActive(item.href)
-                  ? 'text-navy underline decoration-2 underline-offset-[10px]'
+                  ? 'text-navy underline decoration-2 underline-offset-[12px]'
                   : 'text-ink',
               ]}
               lang="en"

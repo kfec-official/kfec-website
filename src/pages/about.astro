@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import SectionHeading from '../components/SectionHeading.astro';
 import site from '../data/site.json';
 import { url } from '../lib/utils';
 ---
@@ -9,7 +10,7 @@ import { url } from '../lib/utils';
   title="학회 소개"
   description={`${site.koreanName} KFEC의 목적과 소속을 소개합니다. ${site.affiliation} 소속.`}
 >
-  <PageHeader eyebrow="About" title="학회 소개" />
+  <PageHeader eyebrow="About" title="학회 소개" lead={`${site.affiliation} 소속 금융투자학회입니다.`} />
 
   <section class="container-page py-14 sm:py-16" aria-labelledby="purpose-title">
     <div class="grid gap-10 md:grid-cols-[1fr_1.6fr]">
@@ -42,6 +43,28 @@ import { url } from '../lib/utils';
         </dl>
         <a href={url('/join')} class="btn-primary mt-8">가입 안내 보기</a>
       </div>
+    </div>
+  </section>
+
+  <section class="bg-white" aria-labelledby="activities-title">
+    <div class="container-page py-14 sm:py-16">
+      <SectionHeading eyebrow="What We Do" title="주요 활동" id="activities-title" />
+      <ul class="mt-10 grid gap-10 md:grid-cols-3 md:gap-8">
+        {[
+          { no: '01', en: 'Research', title: '리서치', desc: '기업분석·산업분석 보고서를 작성합니다.' },
+          { no: '02', en: 'Competition', title: '대회 참가', desc: '교내외 금융·경제 대회에 참가합니다.' },
+          { no: '03', en: 'Network', title: '네트워크', desc: '교수진·현직 선배와 교류합니다.' },
+        ].map((p) => (
+          <li class="border-t-2 border-navy pt-5">
+            <p class="flex items-baseline justify-between">
+              <span class="num font-display text-4xl font-black text-navy">{p.no}</span>
+              <span class="font-display text-xs tracking-[0.15em] text-muted uppercase" lang="en">{p.en}</span>
+            </p>
+            <h3 class="mt-4 font-serif text-xl font-bold">{p.title}</h3>
+            <p class="mt-2 text-sm leading-6 text-muted">{p.desc}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </BaseLayout>

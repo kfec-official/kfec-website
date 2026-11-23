@@ -1,12 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import ReportCard from '../components/ReportCard.astro';
+import ReportRow from '../components/ReportRow.astro';
+import OpinionBadge from '../components/OpinionBadge.astro';
 import AwardsByYear from '../components/AwardsByYear.astro';
-import { url, getReports, getAwards } from '../lib/utils';
+import { url, getReports, getAwards, formatDate, isoDate } from '../lib/utils';
 import site from '../data/site.json';
 
-const reports = (await getReports()).slice(0, 3);
+const allReports = await getReports();
+const reports = allReports.slice(0, 3);
+const latest = allReports[0];
+const latestIso = latest ? isoDate(latest.data.date) : undefined;
 const awards = getAwards().slice(0, 3);
 ---
 
@@ -14,35 +18,69 @@ const awards = getAwards().slice(0, 3);
   description="경성대학교 금융투자학회 KFEC 공식 홈페이지. 기업·산업 분석 리서치와 교내외 대회 활동으로 차세대 금융 전문 인재를 양성합니다."
 >
   <!-- 히어로 -->
-  <section class="bg-navy text-white" aria-labelledby="hero-title">
-    <div class="container-page py-16 sm:py-24">
-      <img
-        src={url('/images/kfec-logo-white.png')}
-        alt="KFEC Kyungsung Finance & Economics Club"
-        width="1244"
-        height="400"
-        class="h-auto w-full max-w-[22rem] sm:max-w-[28rem]"
-        fetchpriority="high"
-      />
-      <h1 id="hero-title" class="mt-10 font-serif text-3xl font-bold leading-tight sm:text-5xl">
-        읽고, 분석하고, 직접 운용합니다.
-      </h1>
-      <p class="mt-5 max-w-2xl text-base leading-7 text-on-navy sm:text-lg">
-        {site.koreanName}는 경제·금융 분야의 학문적 탐구를 바탕으로 실무 역량을 키우는 학회입니다.
-      </p>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href={url('/research')} class="btn-light">리서치 보기</a>
-        <a href={url('/join')} class="btn-outline-light">가입 안내</a>
+  <section class="bg-navy text-white on-dark" aria-labelledby="hero-title">
+    <div class="container-page grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-16 lg:py-24">
+      <div>
+        <img
+          src={url('/images/kfec-logo-white.png')}
+          alt="KFEC Kyungsung Finance & Economics Club"
+          width="1244"
+          height="400"
+          class="h-auto w-full max-w-[17rem] sm:max-w-[21rem]"
+          fetchpriority="high"
+        />
+        <h1 id="hero-title" class="mt-12 font-serif text-[2.25rem] font-bold leading-[1.25] sm:text-5xl lg:text-[3.25rem]">
+          읽고, 분석하고,<br />직접 운용합니다.
+        </h1>
+        <p class="mt-6 max-w-xl text-base leading-7 text-on-navy sm:text-lg sm:leading-8">
+          {site.koreanName}는 경제·금융 분야의 학문적 탐구를 바탕으로 실무 역량을 키우는 학회입니다.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href={url('/research')} class="btn-light">리서치 보기</a>
+          <a href={url('/join')} class="btn-outline-light">가입 안내</a>
+        </div>
       </div>
 
-      <dl class="mt-14 grid max-w-2xl gap-px border-t border-white/25 pt-6 sm:grid-cols-2">
-        <div>
-          <dt class="text-sm text-on-navy">정규 활동</dt>
-          <dd class="num mt-1 text-xl font-bold">{site.meeting}</dd>
+      {latest && (
+        <aside aria-labelledby="latest-title" class="border border-white/25 bg-navy-dark p-6 sm:p-8">
+          <div class="flex items-center justify-between gap-4 border-b border-white/20 pb-4">
+            <p class="eyebrow-light" lang="en">Latest Research</p>
+            <p class="text-xs text-on-navy">
+              <span class="font-bold text-white">{latest.data.category}</span>
+              <span aria-hidden="true"> · </span>
+              {latestIso ? <time class="num" datetime={latestIso}>{formatDate(latest.data.date)}</time> : formatDate(latest.data.date)}
+            </p>
+          </div>
+          <h2 id="latest-title" class="mt-6 font-serif text-xl font-bold leading-snug sm:text-2xl">
+            <a href={url(`/research/${latest.id}/`)} class="hover:underline underline-offset-4">{latest.data.title}</a>
+          </h2>
+          <p class="mt-4 line-clamp-3 text-sm leading-7 text-on-navy">{latest.data.summary}</p>
+          <div class="mt-7 flex items-center justify-between gap-4 border-t border-white/20 pt-5">
+            <div class="flex items-center gap-3">
+              <OpinionBadge opinion={latest.data.opinion} tone="light" />
+              <span class="text-xs text-on-navy">{latest.data.team}</span>
+            </div>
+            <a href={url(`/research/${latest.id}/`)} class="text-sm font-bold text-white hover:underline underline-offset-4" aria-hidden="true" tabindex="-1">
+              리포트 읽기 →
+            </a>
+          </div>
+        </aside>
+      )}
+    </div>
+
+    <div class="border-t border-white/15">
+      <dl class="container-page grid divide-y divide-white/15 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        <div class="py-5 sm:pr-8">
+          <dt class="text-xs text-on-navy">정규 활동</dt>
+          <dd class="num mt-1 font-bold">{site.meeting}</dd>
         </div>
-        <div class="mt-5 sm:mt-0 sm:border-l sm:border-white/25 sm:pl-8">
-          <dt class="text-sm text-on-navy">가입 자격</dt>
-          <dd class="mt-1 text-xl font-bold">경성대학교 학생 누구나</dd>
+        <div class="py-5 sm:px-8">
+          <dt class="text-xs text-on-navy">가입 자격</dt>
+          <dd class="mt-1 font-bold">경성대학교 학생 누구나</dd>
+        </div>
+        <div class="py-5 sm:pl-8">
+          <dt class="text-xs text-on-navy">소속</dt>
+          <dd class="mt-1 font-bold">{site.affiliation}</dd>
         </div>
       </dl>
     </div>
@@ -62,24 +100,23 @@ const awards = getAwards().slice(0, 3);
           경제·금융 분야의 학문적 탐구를 바탕으로 실무 역량을 강화하고, 교수진·현직 선배와의 네트워크로
           차세대 금융 전문 인재를 양성합니다.
         </p>
-        <ul class="mt-8 grid gap-px border border-line bg-line sm:grid-cols-3">
-          <li class="bg-white p-5">
-            <p class="font-display text-sm font-bold text-navy">01</p>
-            <p class="mt-1 font-bold">리서치</p>
-            <p class="mt-1 text-sm text-muted">기업·산업 분석 보고서</p>
-          </li>
-          <li class="bg-white p-5">
-            <p class="font-display text-sm font-bold text-navy">02</p>
-            <p class="mt-1 font-bold">대회 참가</p>
-            <p class="mt-1 text-sm text-muted">교내외 금융·경제 대회</p>
-          </li>
-          <li class="bg-white p-5">
-            <p class="font-display text-sm font-bold text-navy">03</p>
-            <p class="mt-1 font-bold">네트워크</p>
-            <p class="mt-1 text-sm text-muted">교수진·현직 선배와의 교류</p>
-          </li>
+        <ul class="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-6">
+          {[
+            { no: '01', en: 'Research', title: '리서치', desc: '기업·산업 분석 보고서' },
+            { no: '02', en: 'Competition', title: '대회 참가', desc: '교내외 금융·경제 대회' },
+            { no: '03', en: 'Network', title: '네트워크', desc: '교수진·현직 선배와의 교류' },
+          ].map((p) => (
+            <li class="border-t-2 border-navy pt-4">
+              <p class="flex items-baseline justify-between">
+                <span class="num font-display text-2xl font-black text-navy">{p.no}</span>
+                <span class="font-display text-xs tracking-[0.15em] text-muted uppercase" lang="en">{p.en}</span>
+              </p>
+              <p class="mt-3 font-bold">{p.title}</p>
+              <p class="mt-1 text-sm text-muted">{p.desc}</p>
+            </li>
+          ))}
         </ul>
-        <a href={url('/about')} class="link mt-6 inline-block text-sm font-bold">학회 소개 자세히 보기</a>
+        <a href={url('/about')} class="link mt-8 inline-block text-sm font-bold">학회 소개 자세히 보기</a>
       </div>
     </div>
   </section>
@@ -88,8 +125,8 @@ const awards = getAwards().slice(0, 3);
   <section aria-labelledby="research-title">
     <div class="container-page py-16 md:py-20">
       <SectionHeading eyebrow="Research" title="최신 리서치" id="research-title" moreHref="/research" />
-      <ul class="mt-8 grid gap-5 md:grid-cols-3">
-        {reports.map((r) => <li><ReportCard report={r} /></li>)}
+      <ul class="mt-8 divide-y divide-line border border-line bg-white">
+        {reports.map((r) => <li><ReportRow report={r} /></li>)}
       </ul>
     </div>
   </section>
