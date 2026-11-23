@@ -1,20 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
-import SectionHeading from '../components/SectionHeading.astro';
 import site from '../data/site.json';
-
-const teams = [
-  { name: '리서치 1팀', desc: '기업·산업 분석 보고서 작성' },
-  { name: '리서치 2팀', desc: '기업·산업 분석 보고서 작성' },
-  { name: '투자운용팀', desc: '실전 자산운용 포트폴리오 구성·집행' },
-  { name: '리스크관리팀', desc: '손실 한도·투자 한도 점검' },
-];
 ---
 
 <BaseLayout
-  title="소개 · 조직"
-  description={`${site.koreanName} KFEC의 목적과 조직을 소개합니다. ${site.affiliation} 소속.`}
+  title="학회 소개"
+  description={`${site.koreanName} KFEC의 목적과 소속을 소개합니다. ${site.affiliation} 소속.`}
 >
   <PageHeader eyebrow="About" title="학회 소개" />
 
@@ -43,70 +35,6 @@ const teams = [
             <dd class="num font-medium">{site.meeting}</dd>
           </div>
         </dl>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-white" aria-labelledby="organization">
-    <div class="container-page py-14 sm:py-16">
-      <SectionHeading eyebrow="Organization" title="조직도" id="organization" />
-
-      <!-- 조직도: 시각적 도식 + 스크린 리더용 계층 목록 -->
-      <div class="mt-10" aria-hidden="true">
-        <div class="mx-auto flex max-w-3xl flex-col items-center">
-          <div class="relative flex w-full justify-center">
-            <div class="w-44 bg-navy px-4 py-4 text-center text-white">
-              <p class="font-display text-xs tracking-[0.2em]">PRESIDENT</p>
-              <p class="mt-1 text-lg font-bold">회장</p>
-            </div>
-            <div class="absolute top-1/2 right-0 hidden -translate-y-1/2 items-center sm:flex">
-              <span class="h-px w-10 border-t border-dashed border-muted"></span>
-              <div class="w-36 border border-navy bg-white px-4 py-3 text-center">
-                <p class="font-display text-xs tracking-[0.2em] text-navy">AUDITOR</p>
-                <p class="mt-1 font-bold">감사</p>
-              </div>
-            </div>
-          </div>
-          <div class="mt-4 w-36 border border-navy bg-white px-4 py-3 text-center sm:hidden">
-            <p class="font-display text-xs tracking-[0.2em] text-navy">AUDITOR</p>
-            <p class="mt-1 font-bold">감사</p>
-          </div>
-          <span class="h-8 w-px bg-navy"></span>
-          <div class="w-56 border-2 border-navy bg-white px-4 py-3 text-center">
-            <p class="font-display text-xs tracking-[0.2em] text-navy">VICE PRESIDENTS</p>
-            <p class="mt-1 text-lg font-bold">부회장 <span class="num">2</span>인</p>
-          </div>
-          <span class="h-8 w-px bg-navy"></span>
-        </div>
-        <div class="mx-auto max-w-5xl">
-          <div class="mx-[12.5%] hidden h-px bg-navy md:block"></div>
-          <ul class="grid gap-3 sm:grid-cols-2 md:grid-cols-4 md:gap-4">
-            {teams.map((t) => (
-              <li class="flex flex-col items-center">
-                <span class="hidden h-6 w-px bg-navy md:block"></span>
-                <div class="w-full border-t-4 border-navy bg-paper px-4 py-5 text-center">
-                  <p class="font-bold">{t.name}</p>
-                  <p class="mt-1 text-sm text-muted">{t.desc}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div class="sr-only">
-        <ul>
-          <li>회장
-            <ul>
-              <li>감사 (독립)</li>
-              <li>부회장 2인
-                <ul>
-                  {teams.map((t) => <li>{t.name}: {t.desc}</li>)}
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
       </div>
     </div>
   </section>
