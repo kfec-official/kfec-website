@@ -1,5 +1,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import awardsData from '../data/awards.json';
+import jobsData from '../data/jobs.json';
 
 /** 배포 경로(base)를 반영한 내부 링크를 만듭니다. */
 export function url(path = '/'): string {
@@ -75,4 +76,40 @@ export function formatPeriod(start: string, end: string): string {
   const [ey, ...rest] = end.split('.');
   if (sy && sy === ey && rest.length === 2) return `${start} – ${rest.join('.')}`;
   return `${start} – ${end}`;
+}
+
+export type Job = {
+  type: string;
+  company: string;
+  title: string;
+  /** "2026-12-15" 형식, "상시", 또는 자리표시 */
+  deadline: string;
+  url: string;
+  note?: string;
+};
+
+/** 마감일 정렬 키: 날짜 → 그 날짜, 상시 → 날짜 있는 공고 뒤, 자리표시 → 맨 뒤 */
+function deadlineKey(d: string): number {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(d.trim())) return new Date(`${d.trim()}T00:00:00Z`).getTime();
+  if (isPlaceholder(d)) return Number.MAX_SAFE_INTEGER;
+  return Number.MAX_SAFE_INTEGER - 1;
+}
+
+/** 마감일이 가까운 순으로 정렬합니다. (지난 공고는 화면에서 '마감'으로 표시되고 뒤로 이동) */
+export function getJobs(): Job[] {
+  const todayKst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+  const closed = (d: string) => isDateString(d) && d.trim() < todayKst;
+  return (jobsData as Job[])
+    .map((j, i) => ({ j, i }))
+    .sort(
+      (a, b) =>
+        Number(closed(a.j.deadline)) - Number(closed(b.j.deadline)) ||
+        deadlineKey(a.j.deadline) - deadlineKey(b.j.deadline) ||
+        a.i - b.i,
+    )
+    .map(({ j }) => j);
+}
+
+export function isDateString(d: string): boolean {
+  return /^\d{4}-\d{2}-\d{2}$/.test(d.trim());
 }

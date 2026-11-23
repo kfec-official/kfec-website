@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import JobList from '../components/JobList.astro';
+import { getJobs } from '../lib/utils';
+
+const jobs = getJobs();
+---
+
+<BaseLayout
+  title="채용·인턴"
+  description="KFEC가 학회원에게 공유하는 금융권 인턴·채용 공고 모음입니다."
+>
+  <PageHeader
+    eyebrow="Careers"
+    title="채용·인턴 정보"
+    lead="학회원에게 도움이 될 금융권 인턴·채용 공고를 모았습니다. 마감일이 가까운 순서로 정렬됩니다."
+  />
+  <section class="container-page py-12 sm:py-16" aria-label="공고 목록">
+    <JobList jobs={jobs} headingLevel="h2" />
+    <p class="mt-4 text-sm leading-6 text-muted">
+      자격 요건과 지원 방법은 반드시 각 공고 원문에서 확인하세요. 마감된 공고는 목록 아래쪽에 표시됩니다.
+    </p>
+  </section>
+</BaseLayout>

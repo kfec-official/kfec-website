@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import site from '../data/site.json';
+import { url } from '../lib/utils';
 ---
 
 <BaseLayout
@@ -34,7 +35,12 @@ import site from '../data/site.json';
             <dt class="text-sm text-muted">정규 활동</dt>
             <dd class="num font-medium">{site.meeting}</dd>
           </div>
+          <div class="grid grid-cols-[7rem_1fr] gap-4 border-b border-line py-4">
+            <dt class="text-sm text-muted">가입 자격</dt>
+            <dd class="font-medium">경성대학교 학생이라면 누구나 가입할 수 있습니다.</dd>
+          </div>
         </dl>
+        <a href={url('/join')} class="btn-primary mt-8">가입 안내 보기</a>
       </div>
     </div>
   </section>
