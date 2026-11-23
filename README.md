@@ -17,6 +17,7 @@
 | 리포트 PDF | `public/reports/` 폴더 |
 | 수상 내역 | `src/data/awards.json` |
 | Alumni·실습 현황 | `src/data/alumni.json` |
+| 주요 활동 목록 (What We Do) | `src/data/activities.json` |
 | 정규 활동 시간, 학회비, 카페·인스타그램 주소 | `src/data/site.json` |
 
 > 대괄호로 된 글자(`[기업명]`, `[대회명]`, `[±0.00%]` 등)는 **아직 채우지 않은 자리표시**입니다. 실제 내용으로 바꿔 주세요.

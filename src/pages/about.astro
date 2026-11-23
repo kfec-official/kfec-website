@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import site from '../data/site.json';
+import ActivityList from '../components/ActivityList.astro';
 import { url } from '../lib/utils';
 
 const facts = [
@@ -12,11 +13,7 @@ const facts = [
   { label: 'Eligibility', value: '경성대학교 학생 누구나' },
 ];
 
-const pillars = [
-  { no: '01', title: 'Research', desc: '기업분석·산업분석 보고서를 작성합니다.' },
-  { no: '02', title: 'Competition', desc: '교내외 금융·경제 대회에 참가합니다.' },
-  { no: '03', title: 'Network', desc: '교수진·현직 선배와 교류합니다.' },
-];
+
 ---
 
 <BaseLayout
@@ -50,15 +47,9 @@ const pillars = [
   <section class="bg-white" aria-labelledby="activities-title">
     <div class="container-page py-14 sm:py-20">
       <SectionHeading title="What We Do" id="activities-title" />
-      <ul class="mt-10 grid gap-10 md:grid-cols-3 md:gap-8">
-        {pillars.map((p) => (
-          <li class="border-t-2 border-navy pt-5">
-            <p class="num font-display text-4xl font-black text-navy">{p.no}</p>
-            <h3 lang="en" class="mt-4 font-display text-2xl font-bold">{p.title}</h3>
-            <p class="mt-2 text-sm text-muted">{p.desc}</p>
-          </li>
-        ))}
-      </ul>
+      <div class="mt-10">
+        <ActivityList />
+      </div>
     </div>
   </section>
 </BaseLayout>

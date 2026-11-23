@@ -6,6 +6,7 @@ import OpinionBadge from '../components/OpinionBadge.astro';
 import AwardsByYear from '../components/AwardsByYear.astro';
 import { url, getReports, getAwards, formatDate, isoDate } from '../lib/utils';
 import site from '../data/site.json';
+import ActivityList from '../components/ActivityList.astro';
 
 const allReports = await getReports();
 const reports = allReports.slice(0, 3);
@@ -88,19 +89,9 @@ const awards = getAwards().slice(0, 3);
   <section class="bg-white" aria-labelledby="about-title">
     <div class="container-page py-16 md:py-20">
       <SectionHeading title="About KFEC" desc="학문적 탐구와 실무 역량, 네트워크로 차세대 금융 인재를 양성합니다." id="about-title" moreHref="/about" moreLabel="More" />
-      <ul class="mt-10 grid gap-10 md:grid-cols-3 md:gap-8">
-        {[
-          { no: '01', title: 'Research', desc: '기업분석·산업분석 보고서 작성' },
-          { no: '02', title: 'Competition', desc: '교내외 금융·경제 대회 참가' },
-          { no: '03', title: 'Network', desc: '교수진·현직 선배와의 교류' },
-        ].map((p) => (
-          <li class="border-t-2 border-navy pt-5">
-            <p class="num font-display text-3xl font-black text-navy">{p.no}</p>
-            <h3 lang="en" class="mt-3 font-display text-2xl font-bold">{p.title}</h3>
-            <p class="mt-1.5 text-sm text-muted">{p.desc}</p>
-          </li>
-        ))}
-      </ul>
+      <div class="mt-10">
+        <ActivityList />
+      </div>
     </div>
   </section>
 

@@ -306,6 +306,17 @@ draft: true
 
 ---
 
+### 주요 활동 목록 (About KFEC · What We Do)
+**[주요 활동 고치기 화면 열기](https://github.com/kfec-official/kfec-website/edit/main/src/data/activities.json)**
+
+`"title"`은 영어 이름, `"desc"`는 한 줄짜리 한글 설명입니다. 묶음 순서대로 01, 02, 03… 번호가 자동으로 붙습니다.
+
+```json
+{ "title": "News Scrap", "desc": "경제신문 기사 스크랩·정리" },
+```
+
+---
+
 ## 7. 홈페이지에 잘 반영됐는지 확인하기
 
 1. **[반영 상태 보기 (Actions)](https://github.com/kfec-official/kfec-website/actions)** 를 엽니다.
