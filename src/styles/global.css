@@ -8,8 +8,6 @@
   --color-muted: #4b5563;
   --color-line: #dcdfe6;
   --color-on-navy: #c9d6ea;
-  --color-up: #b42318;
-  --color-down: #1d4ed8;
 
   --font-display: "Playfair Display", "Noto Serif KR", Georgia, serif;
   --font-serif: "Noto Serif KR", "Playfair Display", serif;
@@ -70,9 +68,6 @@
   .num {
     font-variant-numeric: lining-nums tabular-nums;
   }
-  .tone-up { color: var(--color-up); }
-  .tone-down { color: var(--color-down); }
-  .tone-flat { color: var(--color-ink); }
 
   /* 리포트 본문 */
   .prose-report { @apply text-[1.0625rem] leading-8 text-ink; }

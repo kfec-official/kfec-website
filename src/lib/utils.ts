@@ -49,7 +49,6 @@ export type Award = {
   competition: string;
   host: string;
   prize: string;
-  team: string;
 };
 
 /** 수상 내역을 최신 연도순(자리표시 연도는 맨 뒤)으로 정렬합니다. 같은 해는 파일에 적힌 순서를 따릅니다. */
@@ -59,23 +58,6 @@ export function getAwards(): Award[] {
     .map((a, i) => ({ a, i, y: Number.parseInt(String(a.year), 10) }))
     .sort((x, y) => (Number.isNaN(y.y) ? -Infinity : y.y) - (Number.isNaN(x.y) ? -Infinity : x.y) || x.i - y.i)
     .map(({ a }) => a);
-}
-
-/** 수익률 문자열의 부호에 따라 색상 클래스를 고릅니다. (한국 증시 관례: 상승 빨강, 하락 파랑) */
-export function returnTone(value: string): 'up' | 'down' | 'flat' {
-  if (isPlaceholder(value)) return 'flat';
-  const v = value.trim();
-  if (v.startsWith('+')) return 'up';
-  if (v.startsWith('-') || v.startsWith('−') || v.startsWith('–')) return 'down';
-  return 'flat';
-}
-
-/** "2026.09.28" ~ "2026.12.31" → "2026.09.28 – 12.31" (같은 해면 뒤쪽 연도 생략) */
-export function formatPeriod(start: string, end: string): string {
-  const [sy] = start.split('.');
-  const [ey, ...rest] = end.split('.');
-  if (sy && sy === ey && rest.length === 2) return `${start} – ${rest.join('.')}`;
-  return `${start} – ${end}`;
 }
 
 export type Alumni = {

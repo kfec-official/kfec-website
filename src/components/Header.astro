@@ -2,12 +2,11 @@
 import { url } from '../lib/utils';
 
 const nav = [
-  { label: '소개', href: '/about' },
-  { label: '리서치', href: '/research' },
-  { label: '실전 자산운용', href: '/fund' },
-  { label: '수상 내역', href: '/awards' },
-  { label: 'Alumni·실습', href: '/alumni' },
-  { label: '가입 안내', href: '/join' },
+  { label: 'ABOUT', href: '/about', ko: '학회 소개' },
+  { label: 'RESEARCH', href: '/research', ko: '리서치' },
+  { label: 'ACHIEVEMENTS', href: '/awards', ko: '수상 내역' },
+  { label: 'ALUMNI', href: '/alumni', ko: 'Alumni·실습 현황' },
+  { label: 'RECRUITMENT', href: '/join', ko: '가입 안내' },
 ];
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -33,11 +32,12 @@ const isActive = (href: string) =>
               href={url(item.href)}
               aria-current={isActive(item.href) ? 'page' : undefined}
               class:list={[
-                'block px-3 py-2 text-[0.9375rem] font-medium transition-colors hover:text-navy',
+                'block px-3 py-2 font-display text-[0.8125rem] font-bold tracking-[0.12em] transition-colors hover:text-navy',
                 isActive(item.href)
                   ? 'text-navy underline decoration-2 underline-offset-[10px]'
                   : 'text-ink',
               ]}
+              lang="en"
             >{item.label}</a>
           </li>
         ))}
@@ -69,10 +69,10 @@ const isActive = (href: string) =>
             href={url(item.href)}
             aria-current={isActive(item.href) ? 'page' : undefined}
             class:list={[
-              'block py-3.5 text-base font-medium',
-              isActive(item.href) ? 'text-navy font-bold' : 'text-ink',
+              'flex items-baseline justify-between py-3.5 font-display text-[0.9375rem] font-bold tracking-[0.12em]',
+              isActive(item.href) ? 'text-navy' : 'text-ink',
             ]}
-          >{item.label}</a>
+          ><span lang="en">{item.label}</span><span class="font-sans text-sm font-normal tracking-normal text-muted">{item.ko}</span></a>
         </li>
       ))}
     </ul>

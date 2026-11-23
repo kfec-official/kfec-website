@@ -2,12 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import ReportCard from '../components/ReportCard.astro';
-import AwardsTable from '../components/AwardsTable.astro';
-import FundStats from '../components/FundStats.astro';
+import AwardsByYear from '../components/AwardsByYear.astro';
 import AlumniTable from '../components/AlumniTable.astro';
-import { url, getReports, getAwards, getAlumni, formatPeriod } from '../lib/utils';
+import { url, getReports, getAwards, getAlumni } from '../lib/utils';
 import site from '../data/site.json';
-import fund from '../data/fund.json';
 
 const reports = (await getReports()).slice(0, 3);
 const awards = getAwards().slice(0, 3);
@@ -15,7 +13,7 @@ const alumni = getAlumni().slice(0, 3);
 ---
 
 <BaseLayout
-  description="경성대학교 금융투자학회 KFEC 공식 홈페이지. 기업·산업 분석 리서치와 실전 자산운용으로 차세대 금융 전문 인재를 양성합니다."
+  description="경성대학교 금융투자학회 KFEC 공식 홈페이지. 기업·산업 분석 리서치와 교내외 대회 활동으로 차세대 금융 전문 인재를 양성합니다."
 >
   <!-- 히어로 -->
   <section class="bg-navy text-white" aria-labelledby="hero-title">
@@ -45,8 +43,8 @@ const alumni = getAlumni().slice(0, 3);
           <dd class="num mt-1 text-xl font-bold">{site.meeting}</dd>
         </div>
         <div class="mt-5 sm:mt-0 sm:border-l sm:border-white/25 sm:pl-8">
-          <dt class="text-sm text-on-navy">실전 자산운용 기간</dt>
-          <dd class="num mt-1 text-xl font-bold">{formatPeriod(fund.periodStart, fund.periodEnd)}</dd>
+          <dt class="text-sm text-on-navy">가입 자격</dt>
+          <dd class="mt-1 text-xl font-bold">경성대학교 학생 누구나</dd>
         </div>
       </dl>
     </div>
@@ -74,8 +72,8 @@ const alumni = getAlumni().slice(0, 3);
           </li>
           <li class="bg-white p-5">
             <p class="font-display text-sm font-bold text-navy">02</p>
-            <p class="mt-1 font-bold">실전 자산운용</p>
-            <p class="mt-1 text-sm text-muted">리서치 기반 직접 운용</p>
+            <p class="mt-1 font-bold">대회 참가</p>
+            <p class="mt-1 text-sm text-muted">교내외 금융·경제 대회</p>
           </li>
           <li class="bg-white p-5">
             <p class="font-display text-sm font-bold text-navy">03</p>
@@ -98,28 +96,18 @@ const alumni = getAlumni().slice(0, 3);
     </div>
   </section>
 
-  <!-- 실전 자산운용 -->
-  <section class="bg-white" aria-labelledby="fund-title">
-    <div class="container-page py-16 md:py-20">
-      <SectionHeading eyebrow="Asset Management" title="실전 자산운용" id="fund-title" moreHref="/fund" moreLabel="운용 프로세스 보기" />
-      <div class="mt-8">
-        <FundStats />
-      </div>
-    </div>
-  </section>
-
   <!-- 최근 수상 -->
-  <section aria-labelledby="awards-title">
+  <section class="bg-white" aria-labelledby="awards-title">
     <div class="container-page py-16 md:py-20">
-      <SectionHeading eyebrow="Awards" title="최근 수상 내역" id="awards-title" moreHref="/awards" />
+      <SectionHeading eyebrow="Achievements" title="최근 수상 내역" id="awards-title" moreHref="/awards" />
       <div class="mt-8">
-        <AwardsTable awards={awards} caption="최근 수상 내역 3건" />
+        <AwardsByYear awards={awards} />
       </div>
     </div>
   </section>
 
   <!-- Alumni·실습 현황 -->
-  <section class="bg-white" aria-labelledby="alumni-title">
+  <section aria-labelledby="alumni-title">
     <div class="container-page py-16 md:py-20">
       <SectionHeading eyebrow="Alumni" title="Alumni·실습 현황" id="alumni-title" moreHref="/alumni" />
       <div class="mt-8">
@@ -132,7 +120,7 @@ const alumni = getAlumni().slice(0, 3);
   <section class="bg-navy text-white" aria-labelledby="join-title">
     <div class="container-page flex flex-col gap-6 py-14 md:flex-row md:items-center md:justify-between">
       <div>
-        <h2 id="join-title" class="font-serif text-2xl font-bold">함께 읽고, 분석하고, 운용할 학회원을 찾습니다.</h2>
+        <h2 id="join-title" class="font-serif text-2xl font-bold">함께 읽고 분석할 학회원을 찾습니다.</h2>
         <p class="mt-2 text-on-navy">경성대학교 학생이라면 누구나 지원할 수 있습니다.</p>
       </div>
       <a href={url('/join')} class="btn-light shrink-0">가입 안내 보기</a>
