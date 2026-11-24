@@ -32,9 +32,10 @@ const latestAchievements = getAchievementsByYear().slice(0, 1);
           Read. Analyze.<br />Invest.
         </h1>
         <p class="mt-6 text-base text-on-navy sm:text-lg">읽고, 분석하고, 직접 운용합니다.</p>
-        <div class="mt-9 flex flex-wrap gap-3">
-          <a href={url('/research')} class="btn-light">리서치 보기</a>
-          <a href={url('/join')} class="btn-outline-light">가입 안내</a>
+        <div class="mt-9 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:gap-3">
+          <a href={url('/research')} class="btn-light px-2 whitespace-nowrap sm:px-5">리서치 보기</a>
+          <a href={url('/awards')} class="btn-outline-light px-2 whitespace-nowrap sm:px-5">성과 보기</a>
+          <a href={url('/join')} class="btn-outline-light px-2 whitespace-nowrap sm:px-5">가입 안내</a>
         </div>
       </div>
 
