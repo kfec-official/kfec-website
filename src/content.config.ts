@@ -8,9 +8,9 @@ import { glob } from 'astro/loaders';
 const reports = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: './src/content/reports' }),
   schema: z.object({
-    // 기업명 또는 산업명. 예) "한텍", "화장품 산업"
+    // 기업명·산업명·주제. 예) "한텍", "화장품 산업", "통화신용정책 선제분석"
     title: z.string(),
-    category: z.enum(['기업분석', '산업분석']),
+    category: z.enum(['기업분석', '산업분석', '경제분석']),
     // 발행일 (화면에는 나오지 않고, 최신순 정렬에만 쓰입니다)
     date: z.union([z.date(), z.string()]),
     // (선택) PDF 이름이 .md 파일과 다를 때만 적습니다

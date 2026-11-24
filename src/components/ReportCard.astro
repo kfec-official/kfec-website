@@ -10,28 +10,40 @@ const { report, headingLevel = 'h3' } = Astro.props;
 const { title, category } = report.data;
 const Heading = headingLevel;
 const pdf = getReportPdf(report);
-const isIndustry = category === '산업분석';
-const en = isIndustry ? 'Industry Analysis' : 'Company Analysis';
+// 분류별 표지 색·영문 이름·장식
+const style = {
+  기업분석: { en: 'Company Analysis', band: 'bg-navy', deco: 'line' },
+  산업분석: { en: 'Industry Analysis', band: 'bg-ink', deco: 'bars' },
+  경제분석: { en: 'Economic Analysis', band: 'bg-muted', deco: 'steps' },
+}[category];
 ---
 
 <article class="group flex h-full flex-col border border-line bg-white transition-colors hover:border-navy">
   <!-- 표지 상단 띠 -->
-  <div class:list={['flex items-center justify-between px-6 py-4 text-white on-dark', isIndustry ? 'bg-ink' : 'bg-navy']}>
+  <div class:list={['flex items-center justify-between px-6 py-4 text-white on-dark', style.band]}>
     <img src={url('/images/kfec-mark-white.png')} alt="" width="69" height="20" class="h-5 w-auto" loading="lazy" />
     <span class="font-display text-[0.6875rem] font-bold tracking-[0.2em]" lang="en">RESEARCH</span>
   </div>
 
   <!-- 표지 본문 -->
-  <div class="relative flex flex-1 flex-col overflow-hidden px-6 pt-7 pb-8 sm:min-h-[13rem]">
-    <svg class="pointer-events-none absolute right-5 bottom-5 h-20 w-36 text-line transition-colors group-hover:text-on-navy" viewBox="0 0 144 80" fill="none" aria-hidden="true">
-      {isIndustry ? (
+  <div class="relative flex flex-1 flex-col overflow-hidden px-6 pt-7 pb-24">
+    <svg class="pointer-events-none absolute right-5 bottom-4 h-16 w-28 text-line transition-colors group-hover:text-on-navy" viewBox="0 0 144 80" fill="none" aria-hidden="true">
+      {style.deco === 'bars' && (
         <g fill="currentColor">
           <rect x="4" y="52" width="16" height="28" /><rect x="28" y="40" width="16" height="40" /><rect x="52" y="46" width="16" height="34" />
           <rect x="76" y="28" width="16" height="52" /><rect x="100" y="18" width="16" height="62" /><rect x="124" y="6" width="16" height="74" />
         </g>
-      ) : (
+      )}
+      {style.deco === 'line' && (
         <g stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
           <polyline points="2,70 24,58 44,64 66,40 86,46 108,22 128,28 142,8" />
+          <line x1="2" y1="79" x2="142" y2="79" stroke-width="1.5" />
+        </g>
+      )}
+      {style.deco === 'steps' && (
+        <g stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+          <polyline points="2,14 30,14 30,30 62,30 62,46 96,46 96,40 142,40" />
+          <polyline points="2,60 20,52 40,62 60,50 80,66 100,56 120,64 142,58" stroke-width="1.6" stroke-dasharray="4 5" />
           <line x1="2" y1="79" x2="142" y2="79" stroke-width="1.5" />
         </g>
       )}
@@ -40,7 +52,7 @@ const en = isIndustry ? 'Industry Analysis' : 'Company Analysis';
       <span class="h-px w-5 bg-navy" aria-hidden="true"></span>{category}
     </p>
     <Heading class="mt-4 font-serif text-[1.75rem] font-bold leading-tight text-ink sm:text-[2rem]">{title}</Heading>
-    <p class="mt-2 font-display text-sm text-muted italic" lang="en">{en}</p>
+    <p class="mt-2 font-display text-sm text-muted italic" lang="en">{style.en}</p>
   </div>
 
   <!-- 하단 -->

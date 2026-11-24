@@ -75,7 +75,7 @@ const latestAchievements = getAchievementsByYear().slice(0, 1);
   <!-- 최신 리서치 -->
   <section aria-labelledby="research-title">
     <div class="container-page py-16 md:py-20">
-      <SectionHeading title="Latest Research" desc="학회원이 직접 작성한 기업분석·산업분석 보고서" id="research-title" moreHref="/research" />
+      <SectionHeading title="Latest Research" desc="학회원이 직접 작성한 기업분석·산업분석·경제분석 보고서" id="research-title" moreHref="/research" />
       <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {reports.map((r) => <li><ReportCard report={r} /></li>)}
       </ul>
