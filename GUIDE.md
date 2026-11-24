@@ -185,8 +185,7 @@ draft: true
 3. 초록색 **Commit changes...** → **Commit changes**
 4. 같은 이름의 PDF도 **[PDF 폴더](https://github.com/kfec-official/kfec-website/tree/main/public/reports)** 에서 같은 방법으로 지워 주세요.
 
-> 처음에 들어 있는 `sample-company-1.md`, `sample-company-2.md` 는 **연습용 견본**입니다.
-> 실제 리포트로 내용을 바꾸거나 지워 주세요.
+> **PDF에 개인정보가 없는지 꼭 확인하세요.** 표지의 휴대폰 번호·이메일 등은 지우고 올려 주세요. 홈페이지에 올린 PDF는 누구나 내려받을 수 있습니다.
 
 ---
 
