@@ -1,44 +1,58 @@
 [
   {
+    "year": 2025,
+    "category": "대외활동",
+    "title": "한국경제 × 부증련 경제에디터 3기",
+    "host": "",
+    "result": "우수상"
+  },
+  {
     "year": 2026,
     "category": "공모전",
-    "title": "[대회명]",
-    "host": "[주최 기관]",
-    "result": "[수상 등급]"
+    "title": "한국은행 통화정책 경시대회",
+    "host": "",
+    "result": "지역예선 진출"
+  },
+  {
+    "year": 2026,
+    "category": "공모전",
+    "title": "교내 AI 기업분석대회",
+    "host": "",
+    "result": "우수상"
   },
   {
     "year": 2026,
     "category": "대외활동",
-    "title": "[활동명]",
-    "host": "[주최 기관]",
-    "result": "[활동 내용]"
+    "title": "부산 경제·금융 프론티어(BEFF)",
+    "host": "",
+    "result": ""
+  },
+  {
+    "year": 2026,
+    "category": "대외활동",
+    "title": "미래에셋 금융서비스 부산 TAMS",
+    "host": "",
+    "result": "4·5기"
+  },
+  {
+    "year": 2026,
+    "category": "대외활동",
+    "title": "부산지역 대학생 역량강화 네트워크(BUFF)",
+    "host": "",
+    "result": "10기"
   },
   {
     "year": 2026,
     "category": "진출",
-    "title": "[기관·기업명]",
+    "title": "캠코 · IBK저축은행 · LH 등",
     "host": "",
-    "result": "[재직/인턴/현장실습]"
+    "result": "인턴 · 실습"
   },
   {
-    "year": 2025,
-    "category": "공모전",
-    "title": "[대회명]",
-    "host": "[주최 기관]",
-    "result": "[수상 등급]"
-  },
-  {
-    "year": 2025,
-    "category": "대외활동",
-    "title": "[활동명]",
-    "host": "[주최 기관]",
-    "result": "[활동 내용]"
-  },
-  {
-    "year": 2025,
+    "year": 2026,
     "category": "진출",
-    "title": "[기관·기업명]",
+    "title": "지역농협",
     "host": "",
-    "result": "[재직/인턴/현장실습]"
+    "result": "합격"
   }
 ]

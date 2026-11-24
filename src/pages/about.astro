@@ -8,12 +8,11 @@ import { url } from '../lib/utils';
 
 const facts = [
   { label: '학회명', value: `${site.koreanName} (${site.name})` },
+  { label: '창립', value: site.founded },
   { label: '소속', value: site.affiliation },
   { label: '정규 활동', value: site.meeting },
   { label: '가입 자격', value: '경성대학교 학생 누구나' },
 ];
-
-
 ---
 
 <BaseLayout
@@ -27,9 +26,9 @@ const facts = [
     <p class="mt-10 font-serif text-2xl font-bold text-ink sm:text-[1.75rem]">
       학문적 탐구와 실무 역량, 네트워크로 차세대 금융 인재를 양성합니다.
     </p>
-    <dl class="mt-10 grid border-t border-line sm:grid-cols-2 lg:grid-cols-4">
+    <dl class="mt-10 flex flex-col border-y border-line sm:flex-row sm:flex-wrap sm:gap-x-12 lg:justify-between">
       {facts.map((f) => (
-        <div class="border-b border-line py-5 sm:pr-6">
+        <div class="border-b border-line py-5 last:border-b-0 sm:border-b-0">
           <dt class="text-sm font-bold text-navy">{f.label}</dt>
           <dd class="num mt-1.5 font-medium">{f.value}</dd>
         </div>
