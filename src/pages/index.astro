@@ -3,13 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import ReportRow from '../components/ReportRow.astro';
 import YeouidoSkyline from '../components/YeouidoSkyline.astro';
-import AwardsByYear from '../components/AwardsByYear.astro';
-import { url, getReports, getAwards } from '../lib/utils';
+import AchievementsByYear from '../components/AchievementsByYear.astro';
+import { url, getReports, getAchievementsByYear } from '../lib/utils';
 import site from '../data/site.json';
 import ActivityList from '../components/ActivityList.astro';
 
 const reports = (await getReports()).slice(0, 3);
-const awards = getAwards().slice(0, 3);
+// 홈에는 가장 최근 연도만 표시
+const latestAchievements = getAchievementsByYear().slice(0, 1);
 ---
 
 <BaseLayout
@@ -84,9 +85,9 @@ const awards = getAwards().slice(0, 3);
   <!-- 최근 수상 -->
   <section class="bg-white" aria-labelledby="awards-title">
     <div class="container-page py-16 md:py-20">
-      <SectionHeading title="Recent Awards" desc="교내외 금융·경제 대회 수상 내역" id="awards-title" moreHref="/awards" />
+      <SectionHeading title="Achievements" desc="공모전, 대외활동, 학회원의 진출 현황입니다." id="awards-title" moreHref="/awards" />
       <div class="mt-8">
-        <AwardsByYear awards={awards} />
+        <AchievementsByYear groups={latestAchievements} />
       </div>
     </div>
   </section>

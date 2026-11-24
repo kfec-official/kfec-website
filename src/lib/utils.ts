@@ -1,6 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import awardsData from '../data/awards.json';
-import alumniData from '../data/alumni.json';
+import achievementsData from '../data/achievements.json';
 
 /** 배포 경로(base)를 반영한 내부 링크를 만듭니다. */
 export function url(path = '/'): string {
@@ -44,44 +43,29 @@ export async function getReports(): Promise<CollectionEntry<'reports'>[]> {
   });
 }
 
-export type Award = {
+export type Achievement = {
   year: string | number;
-  competition: string;
-  host: string;
-  prize: string;
+  /** 공모전 / 대외활동 / 진출 */
+  category: string;
+  /** 대회명 · 활동명 · 기관명 */
+  title: string;
+  /** 주최 기관 (없으면 "") */
+  host?: string;
+  /** 수상 등급 · 활동 내용 · 재직/인턴/현장실습 */
+  result: string;
 };
 
-/** 수상 내역을 최신 연도순(자리표시 연도는 맨 뒤)으로 정렬합니다. 같은 해는 파일에 적힌 순서를 따릅니다. */
-export function getAwards(): Award[] {
-  const list = awardsData as Award[];
-  return list
-    .map((a, i) => ({ a, i, y: Number.parseInt(String(a.year), 10) }))
-    .sort((x, y) => (Number.isNaN(y.y) ? -Infinity : y.y) - (Number.isNaN(x.y) ? -Infinity : x.y) || x.i - y.i)
-    .map(({ a }) => a);
-}
-
-export type Alumni = {
-  /** 재직 / 인턴 / 현장실습 등 */
-  status: string;
-  organization: string;
-  year: string | number;
-};
-
-/** Alumni·실습 현황을 최신 연도순(자리표시 연도는 맨 뒤)으로 정렬합니다. 같은 해는 파일 순서를 따릅니다. */
-export function getAlumni(): Alumni[] {
-  return (alumniData as Alumni[])
-    .map((a, i) => ({ a, i, y: Number.parseInt(String(a.year), 10) }))
-    .sort((x, y) => (Number.isNaN(y.y) ? -Infinity : y.y) - (Number.isNaN(x.y) ? -Infinity : x.y) || x.i - y.i)
-    .map(({ a }) => a);
-}
-
-/** 구분별 인원 수 (자리표시는 세지 않음) */
-export function countAlumniByStatus(list: Alumni[]): { status: string; count: number }[] {
-  const map = new Map<string, number>();
-  for (const a of list) {
-    if (isPlaceholder(a.status)) continue;
-    const key = a.status.trim();
-    map.set(key, (map.get(key) ?? 0) + 1);
+/** Achievements를 연도별로 묶어 최신 연도부터 돌려줍니다. 같은 해 안에서는 파일에 적힌 순서를 따릅니다. */
+export function getAchievementsByYear(): { year: string; items: Achievement[] }[] {
+  const groups = new Map<string, Achievement[]>();
+  for (const a of achievementsData as Achievement[]) {
+    const year = String(a.year).trim();
+    if (!groups.has(year)) groups.set(year, []);
+    groups.get(year)!.push(a);
   }
-  return Array.from(map, ([status, count]) => ({ status, count }));
+  const num = (y: string) => {
+    const n = Number.parseInt(y, 10);
+    return Number.isNaN(n) ? -Infinity : n;
+  };
+  return Array.from(groups, ([year, items]) => ({ year, items })).sort((a, b) => num(b.year) - num(a.year));
 }
