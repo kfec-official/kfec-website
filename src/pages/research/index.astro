@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
-import ReportRow from '../../components/ReportRow.astro';
+import ReportCard from '../../components/ReportCard.astro';
 import { getReports } from '../../lib/utils';
 
 const reports = await getReports();
@@ -42,10 +42,10 @@ const count = (v: string) =>
     {reports.length === 0 ? (
       <p class="py-16 text-center text-muted">등록된 보고서가 없습니다.</p>
     ) : (
-      <ul class="mt-6 divide-y divide-line border border-line bg-white" id="report-list">
+      <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" id="report-list">
         {reports.map((r) => (
           <li data-category={r.data.category}>
-            <ReportRow report={r} headingLevel="h2" />
+            <ReportCard report={r} headingLevel="h2" />
           </li>
         ))}
       </ul>

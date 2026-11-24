@@ -73,11 +73,11 @@ export function getAchievementsByYear(): { year: string; items: Achievement[] }[
 }
 
 /**
- * 리포트의 PDF 주소를 찾습니다.
+ * 리포트의 PDF를 찾습니다.
  * ① pdf: 항목에 적은 파일 → ② .md 파일과 같은 이름의 PDF
- * public/reports/ 에 실제로 파일이 있을 때만 주소를 돌려줍니다.
+ * public/reports/ 에 실제로 파일이 있을 때만 주소와 용량을 돌려줍니다.
  */
-export function getReportPdf(report: CollectionEntry<'reports'>): string | undefined {
+export function getReportPdf(report: CollectionEntry<'reports'>): { href: string; size: string } | undefined {
   const dir = path.join(process.cwd(), 'public', 'reports');
   const files = fs.existsSync(dir) ? fs.readdirSync(dir) : [];
   const find = (name: string) => files.find((f) => f.toLowerCase() === name.toLowerCase());
@@ -88,5 +88,8 @@ export function getReportPdf(report: CollectionEntry<'reports'>): string | undef
     console.warn(`[리포트 ${report.id}] pdf: "${wanted}" 파일을 public/reports/ 에서 찾지 못했습니다.`);
   }
   const file = (wanted && find(wanted)) || find(`${report.id}.pdf`);
-  return file ? url(`/reports/${encodeURIComponent(file)}`) : undefined;
+  if (!file) return undefined;
+  const bytes = fs.statSync(path.join(dir, file)).size;
+  const size = bytes >= 1024 * 1024 ? `${(bytes / 1024 / 1024).toFixed(1)}MB` : `${Math.max(1, Math.round(bytes / 1024))}KB`;
+  return { href: url(`/reports/${encodeURIComponent(file)}`), size };
 }
