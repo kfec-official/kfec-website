@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import achievementsData from '../data/achievements.json';
 
@@ -68,4 +70,23 @@ export function getAchievementsByYear(): { year: string; items: Achievement[] }[
     return Number.isNaN(n) ? -Infinity : n;
   };
   return Array.from(groups, ([year, items]) => ({ year, items })).sort((a, b) => num(b.year) - num(a.year));
+}
+
+/**
+ * 리포트의 PDF 주소를 찾습니다.
+ * ① pdf: 항목에 적은 파일 → ② .md 파일과 같은 이름의 PDF
+ * public/reports/ 에 실제로 파일이 있을 때만 주소를 돌려줍니다.
+ */
+export function getReportPdf(report: CollectionEntry<'reports'>): string | undefined {
+  const dir = path.join(process.cwd(), 'public', 'reports');
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir) : [];
+  const find = (name: string) => files.find((f) => f.toLowerCase() === name.toLowerCase());
+  const wanted = report.data.pdf && !isPlaceholder(report.data.pdf)
+    ? report.data.pdf.replace(/^\/?(public\/)?(reports\/)?/, '').trim()
+    : undefined;
+  if (wanted && !find(wanted)) {
+    console.warn(`[리포트 ${report.id}] pdf: "${wanted}" 파일을 public/reports/ 에서 찾지 못했습니다.`);
+  }
+  const file = (wanted && find(wanted)) || find(`${report.id}.pdf`);
+  return file ? url(`/reports/${encodeURIComponent(file)}`) : undefined;
 }
