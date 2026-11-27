@@ -36,12 +36,18 @@ function toDate(value: Date | string): Date | undefined {
 }
 
 /** 공개 리포트를 최신순(자리표시 날짜는 맨 뒤)으로 가져옵니다. */
+/** 분류 표시 순서: 기업분석 → 산업분석 → 경제분석 */
+const CATEGORY_ORDER = ['기업분석', '산업분석', '경제분석'];
+
+/** 공개 리포트를 분류 순서대로, 같은 분류 안에서는 최신순으로 가져옵니다. */
 export async function getReports(): Promise<CollectionEntry<'reports'>[]> {
   const all = await getCollection('reports', ({ data }) => !data.draft);
   return all.sort((a, b) => {
+    const ca = CATEGORY_ORDER.indexOf(a.data.category);
+    const cb = CATEGORY_ORDER.indexOf(b.data.category);
     const da = toDate(a.data.date)?.getTime() ?? -Infinity;
     const db = toDate(b.data.date)?.getTime() ?? -Infinity;
-    return db - da || a.id.localeCompare(b.id);
+    return ca - cb || db - da || a.id.localeCompare(b.id);
   });
 }
 
