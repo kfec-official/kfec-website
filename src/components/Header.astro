@@ -3,10 +3,10 @@ import { url } from '../lib/utils';
 import site from '../data/site.json';
 
 const nav = [
-  { label: 'ABOUT', href: '/about', ko: '학회 소개' },
-  { label: 'RESEARCH', href: '/research', ko: '리서치' },
-  { label: 'ACHIEVEMENTS', href: '/awards', ko: '공모전 · 대외활동 · 진출' },
-  { label: 'RECRUITMENT', href: '/join', ko: '가입 안내' },
+  { label: 'ABOUT', href: '/about' },
+  { label: 'RESEARCH', href: '/research' },
+  { label: 'ACHIEVEMENTS', href: '/awards' },
+  { label: 'RECRUITMENT', href: '/join' },
 ];
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -92,7 +92,7 @@ const isActive = (href: string) =>
               'flex items-baseline justify-between py-3.5 font-display text-[0.9375rem] font-bold tracking-[0.12em]',
               isActive(item.href) ? 'text-navy' : 'text-ink',
             ]}
-          ><span lang="en">{item.label}</span><span class="font-sans text-sm font-normal tracking-normal text-muted">{item.ko}</span></a>
+          ><span lang="en">{item.label}</span></a>
         </li>
       ))}
     </ul>

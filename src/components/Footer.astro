@@ -3,10 +3,10 @@ import { url } from '../lib/utils';
 import site from '../data/site.json';
 
 const menu = [
-  { label: 'ABOUT', ko: '학회 소개', href: '/about' },
-  { label: 'RESEARCH', ko: '리서치', href: '/research' },
-  { label: 'ACHIEVEMENTS', ko: '공모전 · 대외활동 · 진출', href: '/awards' },
-  { label: 'RECRUITMENT', ko: '가입 안내', href: '/join' },
+  { label: 'ABOUT', href: '/about' },
+  { label: 'RESEARCH', href: '/research' },
+  { label: 'ACHIEVEMENTS', href: '/awards' },
+  { label: 'RECRUITMENT', href: '/join' },
 ];
 ---
 
@@ -31,10 +31,7 @@ const menu = [
       <ul class="mt-4 space-y-2.5 text-sm">
         {menu.map((m) => (
           <li>
-            <a href={url(m.href)} class="group grid grid-cols-[8.5rem_1fr] items-baseline hover:text-white">
-              <span class="font-display text-xs font-bold tracking-[0.12em] text-white" lang="en">{m.label}</span>
-              <span class="group-hover:underline underline-offset-4">{m.ko}</span>
-            </a>
+            <a href={url(m.href)} lang="en" class="font-display text-xs font-bold tracking-[0.12em] text-white hover:underline underline-offset-4">{m.label}</a>
           </li>
         ))}
       </ul>
