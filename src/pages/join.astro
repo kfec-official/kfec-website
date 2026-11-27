@@ -5,6 +5,12 @@ import SectionHeading from '../components/SectionHeading.astro';
 import site from '../data/site.json';
 
 const requirements = ['신문 스크랩 10회', '기업 분석 보고서 1회', '교외 대회 1회', '강연 참여 1회'];
+const process = [
+  { title: '서류 지원', desc: '온라인 지원서 작성 및 제출' },
+  { title: '대면 면접', desc: '지원자별 대면 면접 진행' },
+  { title: '합격자 발표', desc: '합격자에게 개별 문자로 안내' },
+];
+
 const info = [
   { label: '가입 자격', value: '경성대학교 학생 누구나' },
   { label: '학회비', value: site.fee, note: site.feeExemption },
@@ -34,7 +40,26 @@ const info = [
     </dl>
   </section>
 
-  <section class="bg-white" aria-labelledby="completion-title">
+  <section class="bg-white" aria-labelledby="process-title">
+    <div class="container-page py-14 sm:py-20">
+      <SectionHeading title="Process" desc="지원서 접수부터 합격자 발표까지 3단계로 진행됩니다." id="process-title" />
+      <ol class="mt-8 grid gap-px border border-line bg-line md:grid-cols-3">
+        {process.map((p, i) => (
+          <li class="relative bg-white p-6 sm:p-7">
+            <p class="font-display text-xs font-bold tracking-[0.15em] text-navy" lang="en">STEP</p>
+            <p class="num mt-1 font-display text-3xl font-black text-navy" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+            <h3 class="mt-4 text-lg font-bold">{p.title}</h3>
+            <p class="mt-1 text-sm text-muted">{p.desc}</p>
+            {i < process.length - 1 && (
+              <span aria-hidden="true" class="absolute top-1/2 -right-3.5 z-10 hidden h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-white text-sm text-navy md:flex">→</span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="completion-title">
     <div class="container-page py-14 sm:py-20">
       <SectionHeading title="Completion" desc="1년 이상 활동하고, 아래 4가지 중 2가지 이상을 충족하면 수료합니다." id="completion-title" />
       <ol class="mt-8 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
